@@ -3,3 +3,39 @@
   margin: 0;
   padding: 0;
 }
+
+.homeBanner {
+  background-color: #003580;
+  color: white;
+}
+
+.homeDateBar {
+  background: linear-gradient(to bottom, #003580 50%, transparent 50%);
+}
+
+.rdrDefinedRangesWrapper {
+  display: none !important;
+}
+
+.dropdown-toggle::after {
+  content: none !important;
+}
+
+.dropdown .dropdown-menu {
+  -webkit-transition: all 0.32s;
+  -moz-transition: all 0.32s;
+  -ms-transition: all 0.32s;
+  -o-transition: all 0.32s;
+  transition: all 0.32s;
+
+  display: block;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateX(0) scaleY(0);
+  transform-origin: top;
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  transform: translateX(0) scaleY(1);
+}

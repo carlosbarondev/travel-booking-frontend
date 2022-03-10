@@ -10,6 +10,17 @@ export const DatePicker = () => {
     const [checking, setChecking] = useState(false);
     const [state, setState] = useState();
 
+    const [isDesktop, setDesktop] = useState(window.innerWidth > 768);
+
+    const updateMedia = () => {
+        setDesktop(window.innerWidth > 768);
+    };
+
+    useEffect(() => {
+        window.addEventListener("resize", updateMedia);
+        return () => window.removeEventListener("resize", updateMedia);
+    });
+
     useEffect(() => {
         setState([{
             startDate: new Date(),
@@ -25,7 +36,7 @@ export const DatePicker = () => {
             onChange={item => setState([item.selection])}
             showSelectionPreview={true}
             moveRangeOnFirstSelection={false}
-            months={2}
+            months={isDesktop ? 2 : 1}
             ranges={state}
             direction="horizontal"
         />

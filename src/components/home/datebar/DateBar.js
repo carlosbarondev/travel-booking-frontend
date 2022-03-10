@@ -8,7 +8,7 @@ export const DateBar = () => {
         <div className="homeDateBar">
             <Container>
                 <Row className="border border-3 border-warning">
-                    <Col xs={12} sm={4} className="border border-3 border-warning p-0">
+                    <Col xs={12} xl={4} className="border border-3 border-warning p-0">
                         <div className="d-grid">
                             <Button
                                 className="border border-warning rounded-0 shadow-none"
@@ -16,14 +16,16 @@ export const DateBar = () => {
                                 variant="primary"
                                 size="lg"
                             >
-                                <span className="float-start">
-                                    <i className="fa-solid fa-bed fa-lg me-3" style={{ "color": "#BDBDBD" }}></i>
+                                <div className="float-start d-flex">
+                                    <div style={{ "width": "45px" }}>
+                                        <i className="fa-solid fa-bed fa-xl me-2" style={{ "color": "#BDBDBD" }}></i>
+                                    </div>
                                     <strong>¿Adónde vas?</strong>
-                                </span>
+                                </div>
                             </Button>
                         </div>
                     </Col>
-                    <Col xs={12} sm={3} className="border border-3 border-warning border-start-1 border-end-1 p-0">
+                    <Col xs={12} xl={3} className="border border-3 border-warning border-start-1 border-end-1 p-0">
                         <Dropdown>
                             <div className="d-grid">
                                 <Dropdown.Toggle
@@ -33,10 +35,12 @@ export const DateBar = () => {
                                     variant="primary"
                                     size="lg"
                                 >
-                                    <span className="float-start">
-                                        <i className="fa-solid fa-calendar-days fa-lg me-3" style={{ "color": "#BDBDBD" }}></i>
+                                    <div className="float-start d-flex">
+                                        <div style={{ "width": "45px" }}>
+                                            <i className="fa-solid fa-calendar-days fa-xl me-2" style={{ "color": "#BDBDBD" }}></i>
+                                        </div>
                                         <strong>Check-in - Check-out</strong>
-                                    </span>
+                                    </div>
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
@@ -45,21 +49,23 @@ export const DateBar = () => {
                             </div>
                         </Dropdown>
                     </Col>
-                    <Col xs={12} sm={4} className="border border-3 border-warning p-0">
+                    <Col xs={12} xl={4} className="border border-3 border-warning p-0">
                         <div className="d-grid">
                             <Button
                                 className="border border-warning rounded-0 shadow-none"
                                 style={{ "backgroundColor": "white", "color": "black", "fontSize": "14px" }}
                                 variant="primary" size="lg"
                             >
-                                <span className="float-start">
-                                    <i className="fa-solid fa-user-large fa-lg me-3" style={{ "color": "#BDBDBD" }}></i>
+                                <div className="float-start d-flex">
+                                    <div style={{ "width": "45px" }}>
+                                        <i className="fa-solid fa-user-large fa-xl me-2" style={{ "color": "#BDBDBD" }}></i>
+                                    </div>
                                     <strong>2 adultos - 0 niños - 1 habitación</strong>
-                                </span>
+                                </div>
                             </Button>
                         </div>
                     </Col>
-                    <Col xs={12} sm={1} className="border border-3 border-warning border-start-1 p-0">
+                    <Col xs={12} xl={1} className="border border-3 border-warning border-start-1 p-0">
                         <div className="d-grid">
                             <Button
                                 className="border border-warning rounded-0 shadow-none"

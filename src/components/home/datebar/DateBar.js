@@ -6,12 +6,12 @@ export const DateBar = () => {
 
     return (
         <div className="homeDateBar">
-            <Container>
-                <Row className="border border-3 border-warning">
-                    <Col xs={12} xl={4} className="border border-3 border-warning p-0">
+            <Container className="bg-warning">
+                <Row>
+                    <Col xs={12} xl={4} className="p-2">
                         <div className="d-grid">
                             <Button
-                                className="border border-warning rounded-0 shadow-none"
+                                className="border-0 rounded-0 shadow-none"
                                 style={{ "backgroundColor": "white", "color": "black", "fontSize": "14px" }}
                                 variant="primary"
                                 size="lg"
@@ -25,12 +25,12 @@ export const DateBar = () => {
                             </Button>
                         </div>
                     </Col>
-                    <Col xs={12} xl={3} className="border border-3 border-warning border-start-1 border-end-1 p-0">
+                    <Col xs={12} xl={3} className="p-2 py-0 py-xl-2 ps-xl-0 pe-xl-0">
                         <Dropdown>
                             <div className="d-grid">
                                 <Dropdown.Toggle
                                     id="dropdown-basic"
-                                    className="border border-warning rounded-0 shadow-none"
+                                    className="border-0 rounded-0 shadow-none"
                                     style={{ "backgroundColor": "white", "color": "black", "fontSize": "14px" }}
                                     variant="primary"
                                     size="lg"
@@ -49,10 +49,10 @@ export const DateBar = () => {
                             </div>
                         </Dropdown>
                     </Col>
-                    <Col xs={12} xl={4} className="border border-3 border-warning p-0">
+                    <Col xs={12} xl={4} className="p-2">
                         <div className="d-grid">
                             <Button
-                                className="border border-warning rounded-0 shadow-none"
+                                className="border-0 rounded-0 shadow-none"
                                 style={{ "backgroundColor": "white", "color": "black", "fontSize": "14px" }}
                                 variant="primary" size="lg"
                             >
@@ -65,10 +65,10 @@ export const DateBar = () => {
                             </Button>
                         </div>
                     </Col>
-                    <Col xs={12} xl={1} className="border border-3 border-warning border-start-1 p-0">
+                    <Col xs={12} xl={1} className="p-2 pt-0 pt-xl-2 ps-xl-0">
                         <div className="d-grid">
                             <Button
-                                className="border border-warning rounded-0 shadow-none"
+                                className="border-0 rounded-0 shadow-none"
                                 style={{ "fontSize": "14px" }}
                                 variant="primary"
                                 size="lg"

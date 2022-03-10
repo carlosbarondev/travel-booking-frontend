@@ -4,7 +4,7 @@ export const CategoriesList = () => {
     return (
         <Container className="mt-4 mb-4 p-0">
             <h4 className="mb-3">Busca por tipo de alojamiento</h4>
-            <Row xs={3} sm={4} md={6} className="g-4">
+            <Row xs={3} sm={4} md={6} className="g-0">
                 {Array.from({ length: 6 }).map((_, idx) => (
                     <Col key={idx}>
                         <Card>

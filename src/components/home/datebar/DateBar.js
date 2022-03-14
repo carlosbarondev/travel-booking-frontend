@@ -1,8 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { Button, Col, Container, Dropdown, Row } from "react-bootstrap"
 
 import { DatePicker } from "../DatePicker"
 
 export const DateBar = () => {
+
+    const navigate = useNavigate();
 
     return (
         <div className="homeDateBar">
@@ -72,6 +75,7 @@ export const DateBar = () => {
                                 style={{ "fontSize": "14px" }}
                                 variant="primary"
                                 size="lg"
+                                onClick={() => navigate("/hoteles")}
                             >
                                 <strong>Buscar</strong>
                             </Button>

@@ -11,8 +11,8 @@ import { Orders } from "../components/panel/user/Orders";
 import { OrdersDetail } from "../components/panel/user/OrdersDetail";
 import { AdminPanel } from "../components/panel/admin/AdminPanel";
 import { Users } from "../components/panel/admin/Users";
-import { Products } from "../components/panel/admin/Products";
-import { ProductDetail } from "../components/panel/admin/ProductDetail";
+import { Hotels } from "../components/panel/admin/Hotels";
+import { HotelDetail } from "../components/panel/admin/HotelDetail";
 
 export const PanelRouter = () => {
 
@@ -89,26 +89,26 @@ export const PanelRouter = () => {
                                     </Col>
                                 </Row>
                             } />
-                            {/* <Route path="productos" element={
+                            <Route path="hoteles" element={
                                 <Row>
                                     <Col xs={12} lg={2}>
                                         <AdminPanel />
                                     </Col>
                                     <Col xs={12} lg={10}>
-                                        <Products />
+                                        <Hotels />
                                     </Col>
                                 </Row>
                             } />
-                            <Route path="productos/:ProductoNombre" element={
+                            <Route path="hoteles/:HotelName" element={
                                 <Row>
                                     <Col xs={12} lg={2}>
                                         <AdminPanel />
                                     </Col>
                                     <Col xs={12} lg={10}>
-                                        <ProductDetail />
+                                        <HotelDetail />
                                     </Col>
                                 </Row>
-                            } /> */}
+                            } />
                             <Route
                                 path="/"
                                 element={<Navigate to="/panel/usuarios" />}

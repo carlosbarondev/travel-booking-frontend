@@ -9,7 +9,7 @@ export const AdminPanel = () => {
             <h5>Administración</h5>
             <div className="list-group">
                 <button className="list-group-item list-group-item-action border-0 listaFondo" onClick={() => navigate("/panel/usuarios")}>Usuarios</button>
-                <button className="list-group-item list-group-item-action border-0 listaFondo" onClick={() => navigate("/panel/productos")}>Productos</button>
+                <button className="list-group-item list-group-item-action border-0 listaFondo" onClick={() => navigate("/panel/hoteles")}>Hoteles</button>
             </div>
         </div>
     )

@@ -9,6 +9,8 @@ import { Summary } from '../components/payment/summary/Summary';
 // import { ProductScreen } from '../components/products/ProductScreen';
 // import { SubCategoryList } from '../components/products/SubCategoryList';
 // import { SubCategoryScreen } from '../components/products/SubCategoryScreen';
+import { HotelsList } from '../components/hotels/HotelsList';
+import { HotelScreen } from '../components/hotels/HotelScreen';
 
 export const HomeRouter = () => {
 
@@ -30,6 +32,8 @@ export const HomeRouter = () => {
 
                     <Route path="/:CategoriaNombre/:SubCategoriaNombre/:ProductoNombre" element={<ProductScreen />} />
                 */}
+                <Route path="hoteles" element={<HotelsList />} />
+                <Route path="hoteles/:HotelName" element={<HotelScreen />} />
                 <Route
                     path="summary"
                     element={

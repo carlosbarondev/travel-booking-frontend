@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Formik, Form, useField } from 'formik';
 import * as Yup from 'yup';
-import { Button, Col, FormControl, FormGroup, FormLabel, FormSelect, FormText, Modal, Row } from 'react-bootstrap';
+import { Button, Col, FormControl, FormGroup, FormLabel, FormText, Modal, Row } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { normalizeWhiteSpaces } from 'normalize-text';
 
@@ -22,22 +22,19 @@ const MyTextInput = ({ label, type, ...props }) => {
     );
 };
 
-export const ProductAddModal = ({ categorias, setModalShow, ...props }) => {
+export const HotelAddModal = ({ setModalShow, ...props }) => {
 
     const [fileUpload, setFileUpload] = useState();
-    const [cat, setCat] = useState();
-    const [sub, setSub] = useState();
 
     const handleSubmit = async (values, resetForm) => {
 
         try {
-            const resp = await fetch_Token(`productos`, {
-                nombre: normalizeWhiteSpaces(values.nombre.replace(/-/g, " ")),
-                descripcion: values.descripcion,
-                precio: values.precio,
-                stock: values.stock,
-                categoria: cat._id,
-                subcategoria: sub
+            const resp = await fetch_Token(`hotels`, {
+                name: normalizeWhiteSpaces(values.name.replace(/-/g, " ")),
+                stars: values.stars,
+                description: values.description,
+                country: values.country,
+                city: values.city,
             }, 'POST');
             const body = await resp.json();
             if (body.msg) {
@@ -57,7 +54,7 @@ export const ProductAddModal = ({ categorias, setModalShow, ...props }) => {
     const handleUploadImage = (id) => {
 
         if (fileUpload) {
-            imageUpload(fileUpload, id, "productos")
+            imageUpload(fileUpload, id, "hotels")
                 .then((data) => {
                     if (data.msg) {
                         Swal.fire('Error', data.msg, 'error')
@@ -71,26 +68,34 @@ export const ProductAddModal = ({ categorias, setModalShow, ...props }) => {
     return (
         <Formik
             initialValues={{
-                nombre: "",
-                descripcion: "",
-                precio: "",
-                stock: ""
+                name: "",
+                stars: "",
+                description: "",
+                country: "",
+                city: ""
             }}
             validationSchema={Yup.object({
-                nombre: Yup.string()
+                name: Yup.string()
                     .min(2, '2 caracteres como mínimo')
                     .max(34, '34 caracteres como máximo')
                     .required('El nombre es obligatorio'),
-                descripcion: Yup.string()
+                stars: Yup.number()
+                    .min(1, '1 estrella como mínimo')
+                    .max(5, '5 estrellas como máximo')
+                    .typeError('Debe especificar un número')
+                    .required('Las estrellas son obligatorias'),
+                description: Yup.string()
                     .min(2, '2 caracteres como mínimo')
                     .max(2000, '2000 caracteres como máximo')
                     .required('La descripción es obligatoria'),
-                precio: Yup.number()
-                    .typeError('Debe especificar un número')
-                    .required('Requerido'),
-                stock: Yup.number()
-                    .typeError('Debe especificar un número')
-                    .required('Requerido'),
+                country: Yup.string()
+                    .min(2, '2 caracteres como mínimo')
+                    .max(34, '34 caracteres como máximo')
+                    .required('El país es obligatoria'),
+                city: Yup.string()
+                    .min(2, '2 caracteres como mínimo')
+                    .max(34, '34 caracteres como máximo')
+                    .required('La ciudad es obligatoria'),
             })}
             onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
         >
@@ -102,58 +107,32 @@ export const ProductAddModal = ({ categorias, setModalShow, ...props }) => {
             >
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        Crear Producto
+                        Crear Hotel
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <MyTextInput
-                            label="Nombre"
-                            name="nombre"
-                            placeholder="Nombre*"
-                        />
-                        <Row className='mt-2 mb-4'>
+                        <Row>
                             <Col>
-                                <h5 className='mt-3'>Categoría</h5>
-                                <FormSelect
-                                    defaultValue="default"
-                                    aria-label="Default select example"
-                                    onChange={e => {
-                                        setCat(JSON.parse(e.target.value))
-                                    }}
-                                >
-                                    <option value="default" disabled hidden>Selecciona la categoría</option>
-                                    {
-                                        categorias.map(cat =>
-                                            <option key={cat._id} value={JSON.stringify(cat)}>{cat.nombre}</option>
-                                        )
-                                    }
-                                </FormSelect>
+                                <MyTextInput
+                                    label="Nombre"
+                                    name="name"
+                                    placeholder="Nombre*"
+                                />
                             </Col>
                             <Col>
-                                <h5 className='mt-3'>Subcategoría</h5>
-                                <FormSelect
-                                    disabled={cat ? false : true}
-                                    defaultValue="default"
-                                    aria-label="Default select example"
-                                    onChange={e => {
-                                        setSub(e.target.value)
-                                    }}
-                                >
-                                    <option value="default" disabled hidden>Selecciona la subcategoría</option>
-                                    {
-                                        cat
-                                            ? cat.subcategorias.map(sub =>
-                                                <option key={sub._id} value={sub._id}>{sub.nombre}</option>
-                                            )
-                                            : null
-                                    }
-                                </FormSelect>
+                                <Col>
+                                    <MyTextInput
+                                        label="Estrellas"
+                                        name="stars"
+                                        placeholder="Estrellas*"
+                                    />
+                                </Col>
                             </Col>
                         </Row>
                         <MyTextInput
                             label="Descripción"
-                            name="descripcion"
+                            name="description"
                             type="textarea"
                             rows="6"
                             placeholder="Descripción*"
@@ -161,16 +140,16 @@ export const ProductAddModal = ({ categorias, setModalShow, ...props }) => {
                         <Row className='mt-2'>
                             <Col>
                                 <MyTextInput
-                                    label="Precio"
-                                    name="precio"
-                                    placeholder="Precio*"
+                                    label="País"
+                                    name="country"
+                                    placeholder="País*"
                                 />
                             </Col>
                             <Col>
                                 <MyTextInput
-                                    label="Stock"
-                                    name="stock"
-                                    placeholder="Stock*"
+                                    label="Ciudad"
+                                    name="city"
+                                    placeholder="Ciudad*"
                                 />
                             </Col>
                         </Row>

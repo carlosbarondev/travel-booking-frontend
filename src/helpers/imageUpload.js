@@ -2,7 +2,7 @@ import Swal from "sweetalert2";
 
 import { fetch_Token } from "./fetch";
 
-export const imageUpload = async (event, id, collection) => {
+export const imageUpload = async (event, id, collection, roomType) => {
 
     if (event.target.files) {
 
@@ -12,8 +12,15 @@ export const imageUpload = async (event, id, collection) => {
             const formData = new FormData();
             formData.append('file', files[0]);
 
-            const send = await fetch_Token(`uploads/${collection}/${id}`, formData, 'PUT', true);
-            const body = await send.json();
+            let body;
+
+            if (roomType) {
+                const send = await fetch_Token(`uploads/${collection}/${id}/${roomType}`, formData, 'PUT', true);
+                body = await send.json();
+            } else {
+                const send = await fetch_Token(`uploads/${collection}/${id}`, formData, 'PUT', true);
+                body = await send.json();
+            }
 
             return body;
 

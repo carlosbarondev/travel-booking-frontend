@@ -13,9 +13,10 @@ import { HomeRouter } from "./HomeRouter";
 import { PaymentStepper } from "../components/ui/PaymentStepper";
 import { startChecking } from "../actions/auth";
 import { PrivateRoute } from "./PrivateRoute";
-import { Shipping } from "../components/payment/shipping/Shipping";
 import { Payment } from "../components/payment/payment/Payment";
 import { PanelRouter } from "./PanelRouter";
+import { bookingInit } from "../actions/booking";
+import { BillingAddress } from "../components/payment/billingAddress/BillingAddress";
 
 export const AppRouter = () => {
 
@@ -26,6 +27,12 @@ export const AppRouter = () => {
 
     useEffect(() => { // Restaura la autenticación al recargar el navegador
         dispatch(startChecking())
+    }, [dispatch]);
+
+    useEffect(() => { // Restaura la reserva al recargar el navegador
+        const oldBooking = JSON.parse(localStorage.getItem('booking'));
+        if (oldBooking)
+            dispatch(bookingInit(oldBooking));
     }, [dispatch]);
 
     useEffect(() => { // Navega a la parte superior de la página en dispositivos móviles
@@ -58,7 +65,7 @@ export const AppRouter = () => {
                 element={<Navigate to="/" />}
             />
             <Route
-                path="shipping"
+                path="datos"
                 element=
                 {
                     <>
@@ -66,14 +73,14 @@ export const AppRouter = () => {
 
                         <div className="container">
                             <PrivateRoute isAuthenticated={!!uid}>
-                                <Shipping />
+                                <BillingAddress />
                             </PrivateRoute>
                         </div>
                     </>
                 }
             />
             <Route
-                path="payment"
+                path="pago"
                 element=
                 {
                     <>

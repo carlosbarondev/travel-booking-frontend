@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Container, Image, Navbar } from "react-bootstrap"
@@ -8,6 +9,11 @@ export const TopBar = () => {
     const navigate = useNavigate();
 
     const { name, uid, role, img } = useSelector(state => state.auth);
+    const { booking } = useSelector(state => state.booking);
+
+    useEffect(() => { // Guarda la reserva en el localStorage cuando se modifica
+        localStorage.setItem('booking', JSON.stringify(booking));
+    }, [booking]);
 
     return (
         <Navbar sticky="top" bg="light" style={{ "padding": "0", "margin": "0" }}>

@@ -2,9 +2,7 @@ import { types } from "../types/types";
 
 
 const initialState = {
-    step: 2,
-    shippingModal: false,
-    chooseShippingModal: null,
+    step: 2
 }
 
 export const uiReducer = (state = initialState, action) => {
@@ -13,16 +11,6 @@ export const uiReducer = (state = initialState, action) => {
             return {
                 ...state,
                 step: action.payload,
-            }
-        case types.shippingModalChange:
-            return {
-                ...state,
-                shippingModal: action.payload,
-            }
-        case types.shippingModalChoose:
-            return {
-                ...state,
-                chooseShippingModal: action.payload,
             }
         default:
             return state;

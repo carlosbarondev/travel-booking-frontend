@@ -19,23 +19,23 @@ const stripePromise = loadStripe("pk_test_51KZH9rK7t3f78Hp2q0mtyopW0RtVqrg0MxOht
 export const Payment = () => {
 
     const location = useLocation();
-    const direccion = location.state;
+    const { phone, billing } = location.state;
 
-    const { uid, correo } = useSelector(state => state.auth);
-    const { carrito } = useSelector(state => state.cart);
+    const { uid, email, name } = useSelector(state => state.auth);
+    const { booking } = useSelector(state => state.booking);
 
     const [clientSecret, setClientSecret] = useState("");
     const [checking, setChecking] = useState(false);
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch_Token(`pagos/${uid}`, { correo, direccion, items: carrito }, 'POST')
+        fetch_Token(`payments/${uid}`, { email, name, phone, billing, idHotel: booking.idHotel, items: booking }, 'POST')
             .then((res) => res.json())
             .then((data) => {
                 setClientSecret(data.clientSecret)
                 setChecking(true);
             });
-    }, [uid, correo, direccion, carrito]);
+    }, [uid, email, name, phone, billing, booking]);
 
     const appearance = {
         theme: 'stripe',
@@ -76,7 +76,7 @@ export const Payment = () => {
                                                 Número de tarjeta:
                                                 <span className="ms-4 float-end text-primary">
                                                     4242 4242 4242 4242
-                                                    <button className="ms-2 botonClipboard" onClick={() => copyText('4242 4242 4242 4242')}><i className="fa-solid fa-clipboard"></i></button>
+                                                    <button className="ms-2 buttonClipboard" onClick={() => copyText('4242 4242 4242 4242')}><i className="fa-solid fa-clipboard"></i></button>
                                                 </span>
                                             </div>
                                             <div className='ms-5'>

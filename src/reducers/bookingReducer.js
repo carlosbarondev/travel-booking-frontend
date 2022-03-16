@@ -1,7 +1,7 @@
 import { types } from "../types/types";
 
 const initialState = {
-    booking: {}
+    booking: null
 };
 
 export const bookingReducer = (state = initialState, action) => {
@@ -23,7 +23,7 @@ export const bookingReducer = (state = initialState, action) => {
             }
         case types.bookingClear:
             return {
-                booking: {}
+                booking: null
             }
         default:
             return state;

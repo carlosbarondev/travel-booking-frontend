@@ -96,7 +96,7 @@ export const Orders = () => {
                                                 <Image style={{ "maxHeight": "70%" }} src={p.producto.img ? p.producto.img : "/assets/no-image.png"} fluid />
                                             </Col>
                                             <Col xs={10} md={11}>
-                                                <Link className="linkProducto" style={{ "fontSize": "18px" }} to={`/${normalizeText(p.producto.categoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(p.producto.subcategoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(p.producto.nombre.replace(/\s+/g, "-"))}`}>{p.producto.nombre}</Link>
+                                                <Link className="linkHotel" style={{ "fontSize": "18px" }} to={`/${normalizeText(p.producto.categoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(p.producto.subcategoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(p.producto.nombre.replace(/\s+/g, "-"))}`}>{p.producto.nombre}</Link>
                                                 <div style={{ "fontSize": "14px" }}>Cantidad: {p.unidades}</div>
                                             </Col>
                                         </Row>

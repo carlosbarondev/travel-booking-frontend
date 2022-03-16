@@ -109,7 +109,7 @@ export const Ratings = () => {
                                                     <Image style={{ "maxHeight": "80%" }} src={op.img ? op.img : "/assets/no-image.png"} fluid />
                                                 </Col>
                                                 <Col xs={8} sm={8} md={9} className="d-flex flex-column align-self-center">
-                                                    <Link className="linkProducto mb-1" style={{ "fontSize": "20px" }} to={`/${normalizeText(op.categoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.subcategoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.nombre.replace(/\s+/g, "-"))}`}>{op.nombre}</Link>
+                                                    <Link className="linkHotel mb-1" style={{ "fontSize": "20px" }} to={`/${normalizeText(op.categoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.subcategoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.nombre.replace(/\s+/g, "-"))}`}>{op.nombre}</Link>
                                                     <span className="d-flex align-items-center">
                                                         <Rating
                                                             className="me-2 mb-1"
@@ -170,7 +170,7 @@ export const Ratings = () => {
                                                 </Col>
                                                 <Col xs={9} sm={9} md={9} lg={9} xl={3} className="d-flex flex-column">
                                                     <div>
-                                                        <Link className="linkProducto mb-1" style={{ "fontSize": "20px" }} to={`/${normalizeText(op.categoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.subcategoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.nombre.replace(/\s+/g, "-"))}`}>{op.nombre}</Link>
+                                                        <Link className="linkHotel mb-1" style={{ "fontSize": "20px" }} to={`/${normalizeText(op.categoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.subcategoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.nombre.replace(/\s+/g, "-"))}`}>{op.nombre}</Link>
                                                     </div>
                                                     <div>
                                                         <Button

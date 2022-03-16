@@ -22,7 +22,7 @@ const MyTextInput = ({ label, type, ...props }) => {
     );
 };
 
-export const SummaryModal = ({ id, setModalShow, oldTitulo, oldComentario, oldRating, ...props }) => {
+export const SummaryModal = ({ id, setModalShow, oldTitle, oldText, oldRating, ...props }) => {
 
     const { uid } = useSelector(state => state.auth);
 
@@ -34,12 +34,12 @@ export const SummaryModal = ({ id, setModalShow, oldTitulo, oldComentario, oldRa
 
     const handleSubmit = async (values) => {
 
-        const enviar = await fetch_Token(`productos/${id}`, {
-            titulo: values.titulo,
-            comentario: values.comentario,
+        const enviar = await fetch_Token(`hotels/comment/${id}`, {
+            title: values.title,
+            text: values.text,
             rating,
-            usuario: uid,
-            fecha: new Date(),
+            user: uid,
+            date: new Date(),
         }, 'POST');
         const bodyEnviar = await enviar.json();
 
@@ -55,15 +55,15 @@ export const SummaryModal = ({ id, setModalShow, oldTitulo, oldComentario, oldRa
     return (
         <Formik
             initialValues={{
-                titulo: oldTitulo || '',
-                comentario: oldComentario || '',
+                title: oldTitle || '',
+                text: oldText || '',
             }}
             validationSchema={Yup.object({
-                titulo: Yup.string()
+                title: Yup.string()
                     .min(2, '2 caracteres como mínimo')
                     .max(30, '30 caracteres como máximo')
                     .required('Requerido'),
-                comentario: Yup.string()
+                text: Yup.string()
                     .min(2, '2 caracteres como mínimo')
                     .max(2000, '2000 caracteres como máximo')
                     .required('Requerido'),
@@ -91,15 +91,15 @@ export const SummaryModal = ({ id, setModalShow, oldTitulo, oldComentario, oldRa
                     <Form>
                         <MyTextInput
                             label="Añade un título"
-                            name="titulo"
+                            name="title"
                             placeholder="¿Qué es lo más importante?"
                         />
                         <MyTextInput
                             label="Añadir una reseña escrita"
-                            name="comentario"
+                            name="text"
                             type="textarea"
                             rows="6"
-                            placeholder="¿Qué te ha gustado y qué no? ¿Para qué usaste este producto?"
+                            placeholder="¿Qué te ha gustado y qué no?"
                         />
                         <Button className="mt-4" type="submit" variant="primary" size="lg">Enviar</Button>
                     </Form>

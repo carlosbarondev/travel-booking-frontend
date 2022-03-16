@@ -56,7 +56,7 @@ export const Hotels = () => {
                                 <Row className="align-items-center">
                                     <Col xs={5} sm={4} md={4}>
                                         <Link
-                                            className="linkProducto"
+                                            className="linkHotel"
                                             to={`/hoteles/${normalizeText(hotel.name.replace(/\s+/g, "-"))}`}>
                                             {hotel.name}
                                         </Link>

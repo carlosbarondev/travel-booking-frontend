@@ -7,9 +7,10 @@ export const bookingInit = (booking) => {
     }
 }
 
-export const bookingStartAdd = (rooms, days, roomType, persons, food, parking) => {
+export const bookingStartAdd = (idHotel, rooms, days, roomType, persons, food, parking) => {
     return (dispatch) => {
         let booking = {
+            idHotel,
             rooms,
             days,
             roomType,

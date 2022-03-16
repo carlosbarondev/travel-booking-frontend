@@ -24,8 +24,8 @@ export const Footer = () => {
             <div className="col-4 col-lg-2 d-flex flex-column justify-content-center align-items-center">
                 <h5>Documentación</h5>
                 <ul className="nav flex-column">
-                    <li className="nav-item mb-2"><a href="https://github.com/carlosbarondev/ecommerce-backend" className="nav-link p-0 linkFooter text-muted">Backend</a></li>
-                    <li className="nav-item mb-2"><a href="https://github.com/carlosbarondev/ecommerce-frontend" className="nav-link p-0 linkFooter text-muted">Frontend</a></li>
+                    <li className="nav-item mb-2"><a href="https://github.com/carlosbarondev/travel-booking-backend" className="nav-link p-0 linkFooter text-muted">Backend</a></li>
+                    <li className="nav-item mb-2"><a href="https://github.com/carlosbarondev/travel-booking-frontend" className="nav-link p-0 linkFooter text-muted">Frontend</a></li>
                 </ul>
             </div>
 

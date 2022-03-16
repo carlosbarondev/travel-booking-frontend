@@ -26,16 +26,12 @@ export const HomeRouter = () => {
 
             <Routes>
 
-                {/* <Route path="/:CategoriaNombre" element={<SubCategoryList />} />
-
-                    <Route path="/:CategoriaNombre/:SubCategoriaNombre" element={<SubCategoryScreen />} />
-
-                    <Route path="/:CategoriaNombre/:SubCategoriaNombre/:ProductoNombre" element={<ProductScreen />} />
-                */}
                 <Route path="hoteles" element={<HotelsList />} />
+
                 <Route path="hoteles/:HotelName" element={<HotelScreen />} />
+
                 <Route
-                    path="summary"
+                    path="resumen"
                     element={
                         <PrivateRoute isAuthenticated={!!uid}>
                             <Summary />

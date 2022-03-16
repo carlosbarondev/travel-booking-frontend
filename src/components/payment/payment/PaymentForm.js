@@ -61,7 +61,7 @@ export const PaymentForm = () => {
             elements,
             confirmParams: {
                 // Make sure to change this to your payment completion page
-                return_url: `${process.env.REACT_APP_REACT}/summary`,
+                return_url: `${process.env.REACT_APP_REACT}/resumen`,
             },
         });
 

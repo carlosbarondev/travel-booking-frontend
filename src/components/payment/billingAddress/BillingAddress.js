@@ -41,6 +41,7 @@ export const BillingAddress = () => {
             localStorage.setItem('step', 3);
             navigate("/pago", {
                 state: {
+                    phone: phone,
                     billing: billing,
                 }
             });

@@ -25,7 +25,7 @@ export const HotelScreen = () => {
     const [roomType, setRoomType] = useState(null);
     const [persons, setPersons] = useState(2);
     const [food, setFood] = useState(null);
-    const [parking, setParking] = useState({ type: "parking", price: 0 });
+    const [parking, setParking] = useState({ type: "Sin Parking", price: 0 });
     const [total, setTotal] = useState(0);
     const [checking, setChecking] = useState(false);
 
@@ -50,10 +50,12 @@ export const HotelScreen = () => {
     }, [HotelName, navigate]);
 
     useEffect(() => {
-        dispatch(bookingStartAdd(rooms, days, roomType, persons, food, parking));
-        dispatch(bookingTotal(totalPriceBooking(rooms, days, roomType, persons, food, parking)));
-        setTotal(totalPriceBooking(rooms, days, roomType, persons, food, parking));
-    }, [rooms, days, roomType, persons, food, parking, dispatch])
+        if (checking) {
+            dispatch(bookingStartAdd(hotel._id, rooms, days, roomType, persons, food, parking));
+            dispatch(bookingTotal(totalPriceBooking(rooms, days, roomType, persons, food, parking)));
+            setTotal(totalPriceBooking(rooms, days, roomType, persons, food, parking));
+        }
+    }, [checking, hotel, rooms, days, roomType, persons, food, parking, dispatch])
 
     const handleSelect = (type, content) => {
         document.getElementById(content.type).checked ? document.getElementById(content.type).checked = false : document.getElementById(content.type).checked = true;
@@ -63,7 +65,7 @@ export const HotelScreen = () => {
             case "food":
                 return document.getElementById(content.type).checked ? setFood(content) : setFood(null)
             case "parking":
-                return document.getElementById(content.type).checked ? setParking(content) : setParking({ type: "parking", price: 0 })
+                return document.getElementById(content.type).checked ? setParking(content) : setParking({ type: "Sin Parking", price: 0 })
             default:
                 return
         }
@@ -101,11 +103,11 @@ export const HotelScreen = () => {
                 <h3 className="mt-5">Elige tu habitación</h3>
                 <Row>
                     <Col xs={12} lg={4} className="p-4">
-                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("roomType", { type: "double", price: hotel.doubleRoom.price })}>
+                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("roomType", { type: "Doble", price: hotel.doubleRoom.price })}>
                             <Form.Check
                                 style={{ "pointerEvents": "none", "position": "absolute", "marginTop": "5px", "marginLeft": "12px" }}
                                 type='radio'
-                                id="double"
+                                id="Doble"
                                 name="roomType"
                                 label={``}
                             />
@@ -120,11 +122,11 @@ export const HotelScreen = () => {
                         </div>
                     </Col>
                     <Col xs={12} lg={4} className="p-4">
-                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("roomType", { type: "family", price: hotel.familyRoom.price })}>
+                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("roomType", { type: "Familiar", price: hotel.familyRoom.price })}>
                             <Form.Check
                                 style={{ "pointerEvents": "none", "position": "absolute", "marginTop": "5px", "marginLeft": "12px" }}
                                 type='radio'
-                                id="family"
+                                id="Familiar"
                                 name="roomType"
                                 label={``}
                             />
@@ -139,11 +141,11 @@ export const HotelScreen = () => {
                         </div>
                     </Col>
                     <Col xs={12} lg={4} className="p-4">
-                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("roomType", { type: "suite", price: hotel.suiteRoom.price })}>
+                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("roomType", { type: "Suite", price: hotel.suiteRoom.price })}>
                             <Form.Check
                                 style={{ "pointerEvents": "none", "position": "absolute", "marginTop": "5px", "marginLeft": "12px" }}
                                 type='radio'
-                                id="suite"
+                                id="Suite"
                                 name="roomType"
                                 label={``}
                             />
@@ -161,12 +163,12 @@ export const HotelScreen = () => {
                 <h3 className="mt-5">Elige un régimen</h3>
                 <Row>
                     <Col xs={12} lg={4} className="p-4">
-                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("food", { type: "breakfast", price: 0 })}>
+                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("food", { type: "Alojamiento y desayuno", price: 0 })}>
                             <span className="ms-3 mt-3 d-flex align-items-center">
                                 <Form.Check
                                     style={{ "pointerEvents": "none", "display": "inline-block" }}
                                     type='radio'
-                                    id="breakfast"
+                                    id="Alojamiento y desayuno"
                                     name="food"
                                     label={``}
                                 />
@@ -179,12 +181,12 @@ export const HotelScreen = () => {
                         </div>
                     </Col>
                     <Col xs={12} lg={4} className="p-4">
-                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("food", { type: "dinner", price: 10 })}>
+                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("food", { type: "Media Pensión", price: 10 })}>
                             <span className="ms-3 mt-3 d-flex align-items-center">
                                 <Form.Check
                                     style={{ "pointerEvents": "none", "display": "inline-block" }}
                                     type='radio'
-                                    id="dinner"
+                                    id="Media Pensión"
                                     name="food"
                                     label={``}
                                 />
@@ -202,12 +204,12 @@ export const HotelScreen = () => {
                         </div>
                     </Col>
                     <Col xs={12} lg={4} className="p-4">
-                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("food", { type: "all", price: 40 })}>
+                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("food", { type: "Todo Incluido", price: 40 })}>
                             <span className="ms-3 mt-3 d-flex align-items-center">
                                 <Form.Check
                                     style={{ "pointerEvents": "none", "display": "inline-block" }}
                                     type='radio'
-                                    id="all"
+                                    id="Todo Incluido"
                                     name="food"
                                     label={``}
                                 />
@@ -229,11 +231,11 @@ export const HotelScreen = () => {
                 <h3 className="mt-5">Complete su reserva</h3>
                 <Row className="mb-5">
                     <Col xs={12} lg={4} className="p-4">
-                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("parking", { type: "parking", price: 30 })}>
+                        <div className="border h-100 d-flex flex-column" onClick={() => handleSelect("parking", { type: "Parking", price: 30 })}>
                             <Form.Check
                                 style={{ "pointerEvents": "none", "position": "absolute", "marginTop": "5px", "marginLeft": "12px" }}
                                 type='radio'
-                                id="parking"
+                                id="Parking"
                                 name="parking"
                                 label={``}
                             />

@@ -24,6 +24,7 @@ export const AppRouter = () => {
     const location = useLocation();
 
     const { checking, uid } = useSelector(state => state.auth);
+    const { booking } = useSelector(state => state.booking);
 
     useEffect(() => { // Restaura la autenticación al recargar el navegador
         dispatch(startChecking())
@@ -73,7 +74,11 @@ export const AppRouter = () => {
 
                         <div className="container">
                             <PrivateRoute isAuthenticated={!!uid}>
-                                <BillingAddress />
+                                {
+                                    booking
+                                        ? <BillingAddress />
+                                        : <Navigate to="/" replace={true} />
+                                }
                             </PrivateRoute>
                         </div>
                     </>
@@ -88,7 +93,11 @@ export const AppRouter = () => {
 
                         <div className="container">
                             <PrivateRoute isAuthenticated={!!uid}>
-                                <Payment />
+                                {
+                                    booking
+                                        ? <Payment />
+                                        : <Navigate to="/" replace={true} />
+                                }
                             </PrivateRoute>
                         </div>
                     </>

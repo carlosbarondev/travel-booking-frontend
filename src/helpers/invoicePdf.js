@@ -3,14 +3,14 @@ import pdfFonts from "pdfmake/build/vfs_fonts";
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 
-export const invoicePdf = (nombre, resumen) => {
+export const invoicePdf = (name, summary) => {
 
-    const fecha = resumen.fecha;
+    const date = summary.date;
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
     let rows = [];
-    rows.push(['Descripción', 'Cantidad', 'Precio Unitario', 'Precio Total']);
-    resumen.producto.map(p => rows.push([p.producto.nombre, p.unidades, p.producto.precio, (p.producto.precio * p.unidades).toFixed(2)]));
+    rows.push(['Descripción', 'Habitaciones', 'Régimen', "Parking", 'Precio Total']);
+    rows.push([summary.hotel.name + " habitación " + summary.booking.roomType.type, summary.booking.rooms, summary.booking.food.type, summary.booking.parking.type, summary.booking.total]);
 
     const docDefinition = {
         content: [
@@ -21,10 +21,11 @@ export const invoicePdf = (nombre, resumen) => {
                 columns: [
                     {
                         text: `
-                            ${nombre}
-                            ${resumen.direccionFacturacion.line1} ${resumen.direccionFacturacion.line2}
-                            ${resumen.direccionFacturacion.city} ${resumen.direccionFacturacion.state} ${resumen.direccionFacturacion.postal_code}
-                            ${resumen.direccionFacturacion.country}
+                            ${name}
+                            ${summary.user.billing.line1} 
+                            ${summary.user.billing.line2}
+                            ${summary.user.billing.city} ${summary.user.billing.state} ${summary.user.billing.postal_code}
+                            ${summary.user.billing.country}
                         `,
                         style: {
                             fontSize: 12
@@ -72,26 +73,10 @@ export const invoicePdf = (nombre, resumen) => {
                             },
                             {
                                 text: `
-                                    ${nombre}
-                                    ${resumen.direccionFacturacion.line1} ${resumen.direccionFacturacion.line2}
-                                    ${resumen.direccionFacturacion.city} ${resumen.direccionFacturacion.state} ${resumen.direccionFacturacion.postal_code}
-                                    ${resumen.direccionFacturacion.country}
-                                `
-                            }
-                        ]
-                    },
-                    {
-                        text: [
-                            {
-                                text: `Dirección de envío`,
-                                style: 'subheader'
-                            },
-                            {
-                                text: `
-                                    ${resumen.direccionEnvio.name}
-                                    ${resumen.direccionEnvio.address.line1} ${resumen.direccionEnvio.address.line2}
-                                    ${resumen.direccionEnvio.address.city} ${resumen.direccionEnvio.address.state} ${resumen.direccionEnvio.address.postal_code}
-                                    ${resumen.direccionEnvio.address.country}
+                                    ${name}
+                                    ${summary.user.billing.line1} ${summary.user.billing.line2}
+                                    ${summary.user.billing.city} ${summary.user.billing.state} ${summary.user.billing.postal_code}
+                                    ${summary.user.billing.country}
                                 `
                             }
                         ]
@@ -104,10 +89,8 @@ export const invoicePdf = (nombre, resumen) => {
                             },
                             {
                                 text: `
-                                    ${nombre}
-                                    ${resumen.direccionFacturacion.line1} ${resumen.direccionFacturacion.line2}
-                                    ${resumen.direccionFacturacion.city} ${resumen.direccionFacturacion.state} ${resumen.direccionFacturacion.postal_code}
-                                    ${resumen.direccionFacturacion.country}
+                                    ${summary.hotel.name}
+                                    ${summary.hotel.city} ${summary.hotel.country}
                                 `
                             }
                         ]
@@ -129,8 +112,8 @@ export const invoicePdf = (nombre, resumen) => {
                             },
                             {
                                 text: `
-                                    Fecha del pedido: ${new Date(fecha).toLocaleDateString("es-ES", options)}
-                                    Número del pedido: ${resumen.idPedido}
+                                    Fecha del pedido: ${new Date(date).toLocaleDateString("es-ES", options)}
+                                    Número del pedido: ${summary.idBooking}
                                 `
                             }
                         ]
@@ -153,12 +136,12 @@ export const invoicePdf = (nombre, resumen) => {
             {
                 style: 'tableExample',
                 table: {
-                    widths: [321, '*', '*', '*'],
+                    widths: [220, '*', 90, '*', '*'],
                     body: rows
                 }
             },
             {
-                text: `Total: ${resumen.total / 100} €`,
+                text: `Total: ${summary.total} €`,
                 style: 'total'
             },
         ],

@@ -91,12 +91,42 @@
   padding: 0;
 }
 
-.linkProducto {
+.linkHotel {
   background-color: white;
   color: #0097AF;
   text-decoration: none;
 }
 
-.linkProducto:hover {
+.linkHotel:hover {
+  text-decoration: underline;
+}
+
+.linkFooter {
+  background-color: #f8f9fa;
+  font-size: 18px;
+  text-decoration: none;
+}
+
+.linkFooter:hover {
+  text-decoration: underline;
+}
+
+.buttonClipboard {
+  background-color: white;
+  border: none;
+  color: #0099cc;
+}
+
+.buttonClipboard:hover {
+  color: black;
+}
+
+.buttonLink {
+  background-color: #F7F7F7;
+  border: none;
+  color: #0097AF;
+}
+
+.buttonLink:hover {
   text-decoration: underline;
 }

@@ -52,7 +52,7 @@ export const PanelRouter = () => {
                                     </Col>
                                 </Row>
                             } />
-                            <Route path="pedidos" element={
+                            <Route path="reservas" element={
                                 <Row>
                                     <Col xs={12} lg={2}>
                                         <MenuPanel />
@@ -62,7 +62,7 @@ export const PanelRouter = () => {
                                     </Col>
                                 </Row>
                             } />
-                            <Route path="pedidos/detalles" element={
+                            <Route path="reservas/detalles" element={
                                 <Row>
                                     <Col xs={12} lg={2}>
                                         <MenuPanel />

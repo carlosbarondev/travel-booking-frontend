@@ -13,9 +13,9 @@ export const Orders = () => {
 
     const navigate = useNavigate();
 
-    const { nombre, uid } = useSelector(state => state.auth);
+    const { name, uid } = useSelector(state => state.auth);
 
-    const [pedidos, setPedidos] = useState();
+    const [bookings, setBookings] = useState();
     const [checking, setChecking] = useState(false);
 
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -23,12 +23,13 @@ export const Orders = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const resp = await fetch_Token(`pedidos/${uid}`);
+                const resp = await fetch_Token(`bookings/${uid}`);
                 const body = await resp.json();
                 if (body.msg) {
                     return Swal.fire('Error', body.msg, 'error');
                 } else {
-                    setPedidos(body.pedidos);
+                    setBookings(body.bookings);
+                    console.log(body.bookings)
                     setChecking(true);
                 }
             } catch (error) {
@@ -41,25 +42,25 @@ export const Orders = () => {
 
     return (
         checking && <div className="animate__animated animate__fadeIn mt-4 mb-5">
-            <h3>Mis Pedidos</h3>
+            <h3>Mis Reservas</h3>
             {
-                pedidos.length === 0
-                    ? <div className="centrar mt-5">
-                        <b>No ha realizado ningún pedido todavía,</b>
-                        <div>pero te animamos a ver nuestro catálogo</div>
-                        <Button className="mt-3" variant="warning" onClick={() => navigate(`/`)}>Ver el catálogo</Button>
+                bookings.length === 0
+                    ? <div className="center_column mt-5">
+                        <b>No ha realizado ninguna reserva todavía,</b>
+                        <div>pero te animamos a ver nuestros hoteles</div>
+                        <Button className="mt-3" variant="warning" onClick={() => navigate(`/`)}>Buscar hotel</Button>
                     </div>
                     :
-                    pedidos.map(pedido => (
-                        <Card key={pedido._id} className="mt-4">
+                    bookings.map(booking => (
+                        <Card key={booking._id} className="mt-4">
                             <Card.Header>
                                 <Row className="ms-2">
                                     <Col md={3} className="mb-2">
                                         <Row>
-                                            Pedido realizado
+                                            Reserva realizada
                                         </Row>
                                         <Row>
-                                            {new Date(pedido.fecha).toLocaleDateString("es-ES", options)}
+                                            {new Date(booking.date).toLocaleDateString("es-ES", options)}
                                         </Row>
                                     </Col>
                                     <Col md={3} className="mb-2">
@@ -67,41 +68,37 @@ export const Orders = () => {
                                             Total
                                         </Row>
                                         <Row>
-                                            {pedido.total / 100}€
+                                            {booking.total}€
                                         </Row>
                                     </Col>
                                     <Col className="mb-2">
                                         <Row className="me-1 disable-float">
-                                            Pedido nº {pedido._id}
+                                            Pedido nº {booking.idBooking}
                                         </Row>
                                         <Row className="disable-float">
                                             <span>
-                                                <button className="botonLink" onClick={() => navigate("/panel/pedidos/detalles", {
+                                                <button className="buttonLink" onClick={() => navigate("/panel/reservas/detalles", {
                                                     state: {
-                                                        pedido: pedido
+                                                        booking: booking
                                                     }
-                                                })}>Ver los detalles del pedido</button>
+                                                })}>Ver los detalles de la reserva</button>
                                                 <div className="vr ms-2 me-2"></div>
-                                                <button className="botonLink" onClick={() => invoicePdf(nombre, pedido)}>Factura PDF</button>
+                                                <button className="buttonLink" onClick={() => invoicePdf(name, booking)}>Factura PDF</button>
                                             </span>
                                         </Row>
                                     </Col>
                                 </Row>
                             </Card.Header>
                             <Card.Body>
-                                {
-                                    pedido.producto.map(p => (
-                                        <Row className="align-items-center mb-3" key={p.producto._id}>
-                                            <Col xs={2} md={1} className="d-flex justify-content-center align-items-center" style={{ "height": "5rem" }}>
-                                                <Image style={{ "maxHeight": "70%" }} src={p.producto.img ? p.producto.img : "/assets/no-image.png"} fluid />
-                                            </Col>
-                                            <Col xs={10} md={11}>
-                                                <Link className="linkHotel" style={{ "fontSize": "18px" }} to={`/${normalizeText(p.producto.categoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(p.producto.subcategoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(p.producto.nombre.replace(/\s+/g, "-"))}`}>{p.producto.nombre}</Link>
-                                                <div style={{ "fontSize": "14px" }}>Cantidad: {p.unidades}</div>
-                                            </Col>
-                                        </Row>
-                                    ))
-                                }
+                                <Row className="align-items-center mb-3">
+                                    <Col xs={2} md={1} className="d-flex justify-content-center align-items-center" style={{ "height": "5rem" }}>
+                                        <Image style={{ "maxHeight": "70%" }} src={booking.hotel.img ? booking.hotel.img : "/assets/no-image.png"} fluid />
+                                    </Col>
+                                    <Col xs={10} md={11}>
+                                        <Link className="linkHotel" style={{ "fontSize": "18px" }} to={`/hoteles/${normalizeText(booking.hotel.name.replace(/\s+/g, "-"))}`}>{booking.hotel.name}</Link>
+                                        <div style={{ "fontSize": "14px" }}>Habitaciones: {booking.booking.rooms}</div>
+                                    </Col>
+                                </Row>
                             </Card.Body>
                         </Card>
                     ))

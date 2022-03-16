@@ -16,24 +16,24 @@ export const Ratings = () => {
 
     const { uid } = useSelector(state => state.auth);
 
-    const [valorados, setValorados] = useState();
-    const [noValorados, setNovalorados] = useState();
+    const [valued, setValued] = useState();
+    const [notValued, setNotValued] = useState();
     const [checking, setChecking] = useState(false);
-    const [modalShowValorados, setModalShowValorados] = useState(false);
-    const [modalShowNoValorados, setModalShowNoValorados] = useState(false);
+    const [modalShowValued, setModalShowValued] = useState(false);
+    const [modalShowNotValued, setModalShowNotValued] = useState(false);
 
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const resp = await fetch_Token(`productos/valoraciones/${uid}`);
+                const resp = await fetch_Token(`hotels/comment/${uid}`);
                 const body = await resp.json();
                 if (body.msg) {
                     return Swal.fire('Error', body.msg, 'error');
                 } else {
-                    setValorados(body.valorados);
-                    setNovalorados(body.noValorados);
+                    setValued(body.valued);
+                    setNotValued(body.notValued);
                     setChecking(true);
                 }
             } catch (error) {
@@ -42,9 +42,9 @@ export const Ratings = () => {
             }
         }
         fetchData();
-    }, [modalShowValorados, modalShowNoValorados, uid]);
+    }, [modalShowValued, modalShowNotValued, uid]);
 
-    const handleDelete = (idProducto, idComentario) => {
+    const handleDelete = (idHotel, idComment) => {
         Swal.fire({
             title: '¿Estás seguro?',
             text: "¡No podrás revertir esto!",
@@ -63,7 +63,7 @@ export const Ratings = () => {
                 )
                 async function fetchData() {
                     try {
-                        const resp = await fetch_Token(`productos/valoraciones/${uid}`, { idProducto, idComentario }, 'DELETE');
+                        const resp = await fetch_Token(`hotels/comment/${uid}`, { idHotel, idComment }, 'DELETE');
                         const body = await resp.json();
                         if (body.msg) {
                             return Swal.fire('Error', body.msg, 'error');
@@ -74,7 +74,7 @@ export const Ratings = () => {
                     }
                 }
                 fetchData();
-                setModalShowNoValorados(!modalShowNoValorados);
+                setModalShowNotValued(!modalShowNotValued);
             }
         })
     }
@@ -83,20 +83,19 @@ export const Ratings = () => {
         checking && <div className="animate__animated animate__fadeIn mt-4 mb-5">
             <h3 className="mb-4">Mis Valoraciones</h3>
             <Tabs defaultActiveKey="sinvalorar" id="uncontrolled-tab" className="mb-5">
-                <Tab eventKey="sinvalorar" title={`Sin valorar (${noValorados.length})`}>
+                <Tab eventKey="sinvalorar" title={`Sin valorar (${notValued.length})`}>
                     {
-                        noValorados.length <= 0
-                            ? <div className="centrar">
-                                <b>No hay productos disponibles para valorar</b>
-                                <div>De momento no tienes ningún producto por</div>
-                                <div>valorar, pero te animamos a ver nuestro</div>
-                                <div>catálogo de productos y valorar después de tu</div>
-                                <div>compra.</div>
-                                <Button className="mt-3" variant="warning" onClick={() => navigate(`/`)}>Ver el catálogo</Button>
+                        notValued.length <= 0
+                            ? <div className="d-flex flex-column justify-content-center align-items-center">
+                                <b>No hay hoteles disponibles para valorar</b>
+                                <div>De momento no tienes ningún hotel por</div>
+                                <div>valorar, pero te animamos a visitarnos</div>
+                                <div>y valorar después de tu reserva</div>
+                                <Button className="mt-3" variant="warning" onClick={() => navigate(`/`)}>Buscar hotel</Button>
                             </div>
                             : <TransitionGroup className="todo-list">
                                 {
-                                    noValorados.map(op => (
+                                    notValued.map(op => (
                                         <CSSTransition
                                             key={op._id}
                                             timeout={500}
@@ -109,7 +108,7 @@ export const Ratings = () => {
                                                     <Image style={{ "maxHeight": "80%" }} src={op.img ? op.img : "/assets/no-image.png"} fluid />
                                                 </Col>
                                                 <Col xs={8} sm={8} md={9} className="d-flex flex-column align-self-center">
-                                                    <Link className="linkHotel mb-1" style={{ "fontSize": "20px" }} to={`/${normalizeText(op.categoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.subcategoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.nombre.replace(/\s+/g, "-"))}`}>{op.nombre}</Link>
+                                                    <Link className="linkHotel mb-1" style={{ "fontSize": "20px" }} to={`/hoteles/${normalizeText(op.name.replace(/\s+/g, "-"))}`}>{op.name}</Link>
                                                     <span className="d-flex align-items-center">
                                                         <Rating
                                                             className="me-2 mb-1"
@@ -118,14 +117,14 @@ export const Ratings = () => {
                                                             ratingValue={op.rating}
                                                             allowHover={false}
                                                         />
-                                                        {` ${op.opinion.length} Valoraciones`}
+                                                        {` ${op.comments.length} Valoraciones`}
                                                     </span>
                                                     <div>
                                                         <Button
                                                             className="mt-3"
                                                             variant="outline-secondary"
                                                             size="sm"
-                                                            onClick={() => setModalShowNoValorados(op._id)}
+                                                            onClick={() => setModalShowNotValued(op._id)}
                                                         >
                                                             <span className="disable-card-header">Escribir una opinión sobre el producto</span>
                                                             <span className="enable-card-header">Valorar</span>
@@ -135,9 +134,9 @@ export const Ratings = () => {
                                                 <hr className="mt-5" />
                                                 <SummaryModal
                                                     id={op._id}
-                                                    setModalShow={setModalShowNoValorados}
-                                                    show={modalShowNoValorados === op._id}
-                                                    onHide={() => setModalShowNoValorados("")}
+                                                    setModalShow={setModalShowNotValued}
+                                                    show={modalShowNotValued === op._id}
+                                                    onHide={() => setModalShowNotValued("")}
                                                 />
                                             </Row>
                                         </CSSTransition>
@@ -146,21 +145,21 @@ export const Ratings = () => {
                             </TransitionGroup>
                     }
                 </Tab>
-                <Tab eventKey="valorados" title={`Valorados (${valorados.length})`}>
+                <Tab eventKey="valorados" title={`Valorados (${valued.length})`}>
                     {
-                        valorados.length <= 0
-                            ? <div className="centrar">
-                                <b>No hay productos valorados</b>
-                                <div>No has valorado ningún producto, pero</div>
-                                <div>puedes visitar cualquier producto y dejar tu</div>
-                                <div>valoración para ayudar al resto de usuarios.</div>
-                                <Button className="mt-3" variant="warning" onClick={() => navigate(`/`)}>Ver el catálogo</Button>
+                        valued.length <= 0
+                            ? <div className="d-flex flex-column justify-content-center align-items-center">
+                                <b>No hay hoteles valorados</b>
+                                <div>No has valorado ningún hotel, pero</div>
+                                <div>puedes dejar tu valoración para</div>
+                                <div>ayudar al resto de usuarios.</div>
+                                <Button className="mt-3" variant="warning" onClick={() => navigate(`/`)}>Buscar hotel</Button>
                             </div>
                             : <TransitionGroup className="todo-list">
                                 {
-                                    valorados.map(op => (
+                                    valued.map(op => (
                                         <CSSTransition
-                                            key={op.opinion[0]._id}
+                                            key={op.comments[0]._id}
                                             timeout={500}
                                             classNames="item"
                                         >
@@ -170,14 +169,14 @@ export const Ratings = () => {
                                                 </Col>
                                                 <Col xs={9} sm={9} md={9} lg={9} xl={3} className="d-flex flex-column">
                                                     <div>
-                                                        <Link className="linkHotel mb-1" style={{ "fontSize": "20px" }} to={`/${normalizeText(op.categoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.subcategoria.nombre.replace(/\s+/g, "-"))}/${normalizeText(op.nombre.replace(/\s+/g, "-"))}`}>{op.nombre}</Link>
+                                                        <Link className="linkHotel mb-1" style={{ "fontSize": "20px" }} to={`/hoteles/${normalizeText(op.name.replace(/\s+/g, "-"))}`}>{op.name}</Link>
                                                     </div>
                                                     <div>
                                                         <Button
                                                             className="mt-2"
                                                             variant="outline-secondary"
                                                             size="sm"
-                                                            onClick={() => setModalShowValorados(op._id)}
+                                                            onClick={() => setModalShowValued(op._id)}
                                                         >
                                                             Editar opinión del producto
                                                         </Button>
@@ -187,7 +186,7 @@ export const Ratings = () => {
                                                             className="mt-3"
                                                             variant="danger"
                                                             size="sm"
-                                                            onClick={() => handleDelete(op._id, op.opinion[0]._id)}
+                                                            onClick={() => handleDelete(op._id, op.comments[0]._id)}
                                                         >
                                                             Eliminar opinión
                                                         </Button>
@@ -199,23 +198,23 @@ export const Ratings = () => {
                                                             className="me-2"
                                                             style={{ "pointerEvents": "none", "marginBottom": "3px", "marginLeft": "-5px" }}
                                                             size={20}
-                                                            ratingValue={op.opinion[0].rating}
+                                                            ratingValue={op.comments[0].rating}
                                                             allowHover={false}
                                                         />
-                                                        <div className="fw-bold align-middle" style={{ "fontSize": "16px", "display": "inline" }}>{`${op.opinion[0].titulo}`}</div>
+                                                        <div className="fw-bold align-middle" style={{ "fontSize": "16px", "display": "inline" }}>{`${op.comments[0].title}`}</div>
                                                     </div>
-                                                    <div className="text-muted" style={{ "fontSize": "14px" }}>{`${new Date(op.opinion[0].fecha).toLocaleDateString("es-ES", options)}`}</div>
-                                                    <div className="mt-3" style={{ "whiteSpace": "pre-wrap" }}>{`${op.opinion[0].comentario}`}</div>
+                                                    <div className="text-muted" style={{ "fontSize": "14px" }}>{`${new Date(op.comments[0].date).toLocaleDateString("es-ES", options)}`}</div>
+                                                    <div className="mt-3" style={{ "whiteSpace": "pre-wrap" }}>{`${op.comments[0].text}`}</div>
                                                 </Col>
                                                 <hr className="mt-5" />
                                                 <SummaryModal
                                                     id={op._id}
-                                                    setModalShow={setModalShowValorados}
-                                                    show={modalShowValorados === op._id}
-                                                    onHide={() => setModalShowValorados("")}
-                                                    oldTitulo={op.opinion[0]?.titulo || null}
-                                                    oldComentario={op.opinion[0]?.comentario || null}
-                                                    oldRating={op.opinion[0]?.rating || null}
+                                                    setModalShow={setModalShowValued}
+                                                    show={modalShowValued === op._id}
+                                                    onHide={() => setModalShowValued("")}
+                                                    oldTitle={op.comments[0]?.title || null}
+                                                    oldText={op.comments[0]?.text || null}
+                                                    oldRating={op.comments[0]?.rating || null}
                                                 />
                                             </Row>
                                         </CSSTransition>

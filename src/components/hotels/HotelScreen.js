@@ -18,11 +18,13 @@ export const HotelScreen = () => {
     const navigate = useNavigate();
 
     const { role } = useSelector(state => state.auth);
+    const { booking } = useSelector(state => state.booking);
 
     const [hotel, setHotel] = useState();
+    const [availableRooms, setAvailableRooms] = useState();
     const [rooms, setRooms] = useState(1);
     const [days, setDays] = useState(3);
-    const [idRoom, setIdRoom] = useState(null);
+    const [roomId, setRoomId] = useState(null);
     const [roomType, setRoomType] = useState(null);
     const [persons, setPersons] = useState(2);
     const [food, setFood] = useState(null);
@@ -33,13 +35,14 @@ export const HotelScreen = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const resp = await fetch_No_Token(`hotels/${HotelName}`);
+                const resp = await fetch_No_Token(`hotels/${HotelName}/?from_date=${booking.date.startDate}&to_date=${booking.date.endDate}`);
                 const body = await resp.json();
                 if (body.msg) {
                     console.log(body.msg);
                     navigate("/");
                 } else {
                     setHotel(body.hotel);
+                    setAvailableRooms(body.availableRooms);
                     setChecking(true);
                 }
             } catch (error) {
@@ -48,28 +51,28 @@ export const HotelScreen = () => {
             }
         }
         fetchData();
-    }, [HotelName, navigate]);
+    }, [HotelName, navigate, booking.date.startDate, booking.date.endDate]);
 
     useEffect(() => {
         if (checking) {
-            dispatch(bookingStartAdd(hotel._id, rooms, days, idRoom, roomType, persons, food, parking));
+            dispatch(bookingStartAdd(hotel._id, rooms, days, roomId, roomType, persons, food, parking));
             setTotal(totalPriceBooking(rooms, days, roomType, persons, food, parking));
         }
-    }, [checking, hotel, rooms, days, idRoom, roomType, persons, food, parking, dispatch])
+    }, [checking, hotel, rooms, days, roomId, roomType, persons, food, parking, dispatch])
 
     const handleSelect = (type, content) => {
         switch (type) {
             case "roomType":
-                const free = hotel.rooms.find(room => room.category === content.type && !room.date);
+                const free = availableRooms.find(room => room.category === content.type);
                 if (!free) {
                     return Swal.fire('No disponible', `No hay habitaciones ${content.type} disponibles`, 'info');
                 } else {
                     document.getElementById(content.type).checked ? document.getElementById(content.type).checked = false : document.getElementById(content.type).checked = true;
                     if (document.getElementById(content.type).checked) {
-                        setIdRoom(free.idRoom);
+                        setRoomId(free._id);
                         return setRoomType(content);
                     } else {
-                        setIdRoom(null);
+                        setRoomId(null);
                         return setRoomType(null);
                     }
                 }

@@ -20,7 +20,7 @@ const MyTextInput = ({ label, type, ...props }) => {
     );
 };
 
-export const RoomAddModal = ({ hotel, setHotel, setModalShowAdd, ...props }) => {
+export const RoomAddModal = ({ hotel, setModalShowAdd, ...props }) => {
 
     const [cat, setCat] = useState(null);
 
@@ -29,17 +29,20 @@ export const RoomAddModal = ({ hotel, setHotel, setModalShowAdd, ...props }) => 
             Swal.fire('Error', "Seleccione una categoría", 'error');
         } else {
             try {
-                const resp = await fetch_Token(`hotels/${hotel._id}`, {
-                    idRoom: normalizeWhiteSpaces(values.idRoom),
+                const resp = await fetch_Token(`rooms`, {
+                    roomId: normalizeWhiteSpaces(values.roomId),
+                    hotel: hotel._id,
                     category: cat
-                }, 'PUT');
+                }, 'POST');
                 const body = await resp.json();
                 if (body.msg) {
                     Swal.fire('Error', body.msg, 'error');
                 } else {
-                    setHotel(body);
                     resetForm();
                     setModalShowAdd("");
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
                 }
             } catch (error) {
                 console.log(error.message);
@@ -51,13 +54,13 @@ export const RoomAddModal = ({ hotel, setHotel, setModalShowAdd, ...props }) => 
     return (
         <Formik
             initialValues={{
-                idRoom: "",
+                roomId: "",
             }}
             validationSchema={Yup.object({
-                idRoom: Yup.string()
+                roomId: Yup.string()
                     .min(2, '2 caracteres como mínimo')
                     .max(23, '23 caracteres como máximo')
-                    .required('El idRoom es obligatorio'),
+                    .required('El roomId es obligatorio'),
             })}
             onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
         >
@@ -77,7 +80,7 @@ export const RoomAddModal = ({ hotel, setHotel, setModalShowAdd, ...props }) => 
                         <MyTextInput
                             className="mb-4"
                             label="ID Habitación"
-                            name="idRoom"
+                            name="roomId"
                             placeholder="ID Habitación*"
                         />
                         <h5>Tipo de habitación</h5>

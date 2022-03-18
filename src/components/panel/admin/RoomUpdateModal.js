@@ -20,18 +20,17 @@ const MyTextInput = ({ label, type, ...props }) => {
     );
 };
 
-export const RoomUpdateModal = ({ room, hotel, setHotel, setModalShow, ...props }) => {
+export const RoomUpdateModal = ({ room, setModalShow, ...props }) => {
 
     const [cat, setCat] = useState(room.category);
 
-    const handleSubmit = async (values, resetForm) => {
+    const handleSubmit = async (values) => {
         if (!cat) {
             Swal.fire('Error', "Seleccione una categoría", 'error');
         } else {
             try {
-                const resp = await fetch_Token(`hotels/${hotel._id}`, {
-                    oldIdRoom: room.idRoom,
-                    idRoom: normalizeWhiteSpaces(values.idRoom),
+                const resp = await fetch_Token(`rooms/${room._id}`, {
+                    roomId: normalizeWhiteSpaces(values.roomId),
                     category: cat,
                     updateRoom: true
                 }, 'PUT');
@@ -39,26 +38,28 @@ export const RoomUpdateModal = ({ room, hotel, setHotel, setModalShow, ...props 
                 if (body.msg) {
                     Swal.fire('Error', body.msg, 'error');
                 } else {
-                    setHotel(body);
+                    setModalShow("");
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
                 }
             } catch (error) {
                 console.log(error.message);
                 Swal.fire('Error', error.message, 'error');
             }
-            setModalShow("");
         }
     }
 
     return (
         <Formik
             initialValues={{
-                idRoom: room.idRoom,
+                roomId: room.roomId,
             }}
             validationSchema={Yup.object({
-                idRoom: Yup.string()
+                roomId: Yup.string()
                     .min(2, '2 caracteres como mínimo')
                     .max(23, '23 caracteres como máximo')
-                    .required('El idRoom es obligatorio'),
+                    .required('El roomId es obligatorio'),
             })}
             onSubmit={(values, { resetForm }) => handleSubmit(values, resetForm)}
         >
@@ -78,7 +79,7 @@ export const RoomUpdateModal = ({ room, hotel, setHotel, setModalShow, ...props 
                         <MyTextInput
                             className="mb-4"
                             label="ID Habitación"
-                            name="idRoom"
+                            name="roomId"
                             placeholder="ID Habitación*"
                         />
                         <h5>Tipo de habitación</h5>

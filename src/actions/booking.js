@@ -8,7 +8,7 @@ export const bookingInit = (booking) => {
     }
 }
 
-export const bookingStartAdd = (idHotel, rooms, days, idRoom, roomType, persons, food, parking) => {
+export const bookingStartAdd = (idHotel, rooms, days, roomId, roomType, persons, food, parking) => {
     return (dispatch) => {
 
         const total = totalPriceBooking(rooms, days, roomType, persons, food, parking);
@@ -17,7 +17,7 @@ export const bookingStartAdd = (idHotel, rooms, days, idRoom, roomType, persons,
             idHotel,
             rooms,
             days,
-            idRoom,
+            roomId,
             roomType,
             persons,
             food,

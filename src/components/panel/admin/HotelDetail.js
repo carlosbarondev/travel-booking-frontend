@@ -30,6 +30,7 @@ export const HotelDetail = () => {
     const navigate = useNavigate();
 
     const [hotel, setHotel] = useState();
+    const [rooms, setRooms] = useState();
     const [fileUpload, setFileUpload] = useState();
     const [fileUpload1, setFileUpload1] = useState();
     const [fileUpload2, setFileUpload2] = useState();
@@ -44,6 +45,10 @@ export const HotelDetail = () => {
                 const resp = await fetch_Token(`hotels/${HotelName.replace(/-/g, " ")}`);
                 const body = await resp.json();
                 setHotel(body.hotel);
+                console.log(body)
+                const resp2 = await fetch_Token(`rooms/?visible={"hotel":"${body.hotel._id}"}`);
+                const body2 = await resp2.json();
+                setRooms(body2.rooms);
                 setChecking(true);
             } catch (error) {
                 console.log(error);
@@ -124,15 +129,16 @@ export const HotelDetail = () => {
         }
     }
 
-    const handleSubDelete = async (id, state, disable) => {
+    const handleRoomDelete = async (id, state, disable) => {
         if (disable) {
             try {
-                const resp = await fetch_Token(`hotels/${hotel._id}`, { room: id, roomOp: !state }, 'PUT');
-                const body = await resp.json();
-                setHotel(body);
+                await fetch_Token(`rooms/${id}`, { state: !state }, 'PUT');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
             } catch (error) {
                 console.log(error);
-                return Swal.fire('Error', error, 'error');
+                return Swal.fire('Error', error.message, 'error');
             }
         } else {
             Swal.fire('Habitación bloqueada', "El webmaster ha bloqueado esta habitación", 'info');
@@ -333,13 +339,13 @@ export const HotelDetail = () => {
                     <h5 className='mt-5'>Habitaciones</h5>
                     <ListGroup variant="flush">
                         {
-                            hotel.rooms.length !== 0
-                                ? hotel.rooms.map(room =>
-                                    <ListGroup.Item key={room.idRoom}>
+                            rooms.length !== 0
+                                ? rooms.map(room =>
+                                    <ListGroup.Item key={room.roomId}>
                                         <Row className="align-items-center">
                                             <Col xs={3} sm={3} md={3}>
                                                 {
-                                                    room.idRoom
+                                                    room.roomId
                                                 }
                                             </Col>
                                             <Col xs={2} sm={2} md={2}>
@@ -358,7 +364,7 @@ export const HotelDetail = () => {
                                                         className="me-1 flex-grow-1"
                                                         variant="outline-primary"
                                                         size="sm"
-                                                        onClick={() => setModalShow(room.idRoom)}
+                                                        onClick={() => setModalShow(room.roomId)}
                                                     >
                                                         Editar
                                                     </Button>
@@ -366,7 +372,7 @@ export const HotelDetail = () => {
                                                         className="flex-grow-1"
                                                         variant={room.state ? "outline-danger" : "outline-success"}
                                                         size="sm"
-                                                        onClick={() => handleSubDelete(room.idRoom, room.state, room.disable)}
+                                                        onClick={() => handleRoomDelete(room._id, room.state, room.disable)}
                                                     >
                                                         {
                                                             room.state ? "Eliminar" : "Habilitar"
@@ -378,9 +384,8 @@ export const HotelDetail = () => {
                                         <RoomUpdateModal
                                             room={room}
                                             hotel={hotel}
-                                            setHotel={setHotel}
                                             setModalShow={setModalShow}
-                                            show={modalShow === room.idRoom}
+                                            show={modalShow === room.roomId}
                                             onHide={() => setModalShow("")}
                                         />
                                     </ListGroup.Item>
@@ -408,7 +413,6 @@ export const HotelDetail = () => {
             </Formik>
             <RoomAddModal
                 hotel={hotel}
-                setHotel={setHotel}
                 setModalShowAdd={setModalShowAdd}
                 show={modalShowAdd === "openSub"}
                 onHide={() => setModalShowAdd("")}

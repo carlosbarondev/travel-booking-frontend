@@ -54,7 +54,10 @@ export const Summary = () => {
                             billing: bodyUser.customer.billing,
                             payment_method: body.paymentIntent.charges.data[0].payment_method_details.card.brand,
                             digits: body.paymentIntent.charges.data[0].payment_method_details.card.last4,
-                            total: body.paymentIntent.amount
+                            total: body.paymentIntent.amount,
+                            room: booking.roomId,
+                            start: booking.date.startDate,
+                            end: booking.date.endDate
                         }, 'POST');
 
                         const bodyBooking = await send.json();

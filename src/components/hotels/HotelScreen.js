@@ -6,7 +6,7 @@ import { Rating } from "react-simple-star-rating";
 import Swal from "sweetalert2";
 
 import { fetch_No_Token } from "../../helpers/fetch";
-import { bookingStartAdd, bookingTotal } from "../../actions/booking";
+import { bookingStartAdd } from "../../actions/booking";
 import { totalPriceBooking } from "../../helpers/totalPriceBooking";
 import { stepChange } from "../../actions/ui";
 
@@ -22,6 +22,7 @@ export const HotelScreen = () => {
     const [hotel, setHotel] = useState();
     const [rooms, setRooms] = useState(1);
     const [days, setDays] = useState(3);
+    const [idRoom, setIdRoom] = useState(null);
     const [roomType, setRoomType] = useState(null);
     const [persons, setPersons] = useState(2);
     const [food, setFood] = useState(null);
@@ -51,20 +52,32 @@ export const HotelScreen = () => {
 
     useEffect(() => {
         if (checking) {
-            dispatch(bookingStartAdd(hotel._id, rooms, days, roomType, persons, food, parking));
-            dispatch(bookingTotal(totalPriceBooking(rooms, days, roomType, persons, food, parking)));
+            dispatch(bookingStartAdd(hotel._id, rooms, days, idRoom, roomType, persons, food, parking));
             setTotal(totalPriceBooking(rooms, days, roomType, persons, food, parking));
         }
-    }, [checking, hotel, rooms, days, roomType, persons, food, parking, dispatch])
+    }, [checking, hotel, rooms, days, idRoom, roomType, persons, food, parking, dispatch])
 
     const handleSelect = (type, content) => {
-        document.getElementById(content.type).checked ? document.getElementById(content.type).checked = false : document.getElementById(content.type).checked = true;
         switch (type) {
             case "roomType":
-                return document.getElementById(content.type).checked ? setRoomType(content) : setRoomType(null)
+                const free = hotel.rooms.find(room => room.category === content.type && !room.date);
+                if (!free) {
+                    return Swal.fire('No disponible', `No hay habitaciones ${content.type} disponibles`, 'info');
+                } else {
+                    document.getElementById(content.type).checked ? document.getElementById(content.type).checked = false : document.getElementById(content.type).checked = true;
+                    if (document.getElementById(content.type).checked) {
+                        setIdRoom(free.idRoom);
+                        return setRoomType(content);
+                    } else {
+                        setIdRoom(null);
+                        return setRoomType(null);
+                    }
+                }
             case "food":
+                document.getElementById(content.type).checked ? document.getElementById(content.type).checked = false : document.getElementById(content.type).checked = true;
                 return document.getElementById(content.type).checked ? setFood(content) : setFood(null)
             case "parking":
+                document.getElementById(content.type).checked ? document.getElementById(content.type).checked = false : document.getElementById(content.type).checked = true;
                 return document.getElementById(content.type).checked ? setParking(content) : setParking({ type: "Sin Parking", price: 0 })
             default:
                 return

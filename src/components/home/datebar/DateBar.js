@@ -29,7 +29,7 @@ export const DateBar = () => {
                         </div>
                     </Col>
                     <Col xs={12} xl={3} className="p-2 py-0 py-xl-2 ps-xl-0 pe-xl-0">
-                        <Dropdown>
+                        <Dropdown id="dropDownDate">
                             <div className="d-grid">
                                 <Dropdown.Toggle
                                     id="dropdown-basic"
@@ -45,7 +45,6 @@ export const DateBar = () => {
                                         <strong>Check-in - Check-out</strong>
                                     </div>
                                 </Dropdown.Toggle>
-
                                 <Dropdown.Menu>
                                     <DatePicker />
                                 </Dropdown.Menu>

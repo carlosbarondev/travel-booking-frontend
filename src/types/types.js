@@ -10,7 +10,7 @@ export const types = {
 
     bookingInit: '[booking] Init booking',
     bookingAdd: '[booking] Add booking',
-    bookingTotal: '[booking] Add booking total',
+    bookingAddDate: '[booking] Add booking date',
     bookingClear: '[booking] Logout',
 
 }

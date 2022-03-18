@@ -45,6 +45,7 @@ export const Summary = () => {
                     if (bodyUser.msg) { // Si hay errores
                         Swal.fire('Error', bodyUser.msg, 'error');
                     } else {
+                        console.log(booking)
                         const send = await fetch_Token(`bookings`, {
                             idBooking: searchParams.get("payment_intent"),
                             user: uid,
@@ -61,6 +62,12 @@ export const Summary = () => {
                         if (bodyBooking.msg) { // Si hay errores
                             Swal.fire('Error', bodyBooking.msg, 'error');
                         } else {
+
+                            await fetch_Token(`hotels/${booking.idHotel}`, { // Actualizar la habitación con la fecha de la reserva
+                                idRoom: booking.idRoom,
+                                date: booking.date
+                            }, 'PUT');
+
                             setSummary(bodyBooking);
                             localStorage.removeItem("booking");
                             dispatch(bookingClear());

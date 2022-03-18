@@ -1,3 +1,4 @@
+import { totalPriceBooking } from "../helpers/totalPriceBooking"
 import { types } from "../types/types"
 
 export const bookingInit = (booking) => {
@@ -7,17 +8,23 @@ export const bookingInit = (booking) => {
     }
 }
 
-export const bookingStartAdd = (idHotel, rooms, days, roomType, persons, food, parking) => {
+export const bookingStartAdd = (idHotel, rooms, days, idRoom, roomType, persons, food, parking) => {
     return (dispatch) => {
-        let booking = {
+
+        const total = totalPriceBooking(rooms, days, roomType, persons, food, parking);
+
+        const booking = {
             idHotel,
             rooms,
             days,
+            idRoom,
             roomType,
             persons,
             food,
-            parking
+            parking,
+            total
         }
+
         dispatch(bookingAdd(booking));
     }
 }
@@ -29,10 +36,10 @@ export const bookingAdd = (booking) => {
     }
 }
 
-export const bookingTotal = (total) => {
+export const bookingAddDate = (date) => {
     return {
-        type: types.bookingTotal,
-        payload: total
+        type: types.bookingAddDate,
+        payload: date
     }
 }
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Container } from "react-bootstrap"
 
 import { fetch_No_Token } from "../../helpers/fetch";
@@ -6,22 +7,24 @@ import { Hotel } from "./Hotel";
 
 export const HotelsList = () => {
 
+    const { booking } = useSelector(state => state.booking);
+
     const [hotels, setHotels] = useState();
     const [checking, setChecking] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const resp = await fetch_No_Token(`hotels`);
+                const resp = await fetch_No_Token(`hotels/?from_date=${booking.date.startDate}&to_date=${booking.date.endDate}`);
                 const body = await resp.json();
-                setHotels(body.hotels);
+                setHotels(body.availableHotels);
                 setChecking(true);
             } catch (error) {
                 console.log(error);
             }
         }
         fetchData();
-    }, []);
+    }, [booking.date.startDate, booking.date.endDate]);
 
     return (
         checking

@@ -13,6 +13,12 @@
   background: linear-gradient(to bottom, #003580 50%, transparent 50%);
 }
 
+.sticky {
+  position: sticky;
+  top: 55px;
+  z-index: 1;
+}
+
 .rdrDefinedRangesWrapper {
   display: none !important;
 }
@@ -131,6 +137,12 @@
   text-decoration: underline;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .center_column {
   display: flex;
   flex-direction: column;
@@ -148,4 +160,30 @@
   .disable-float {
       float: right;
   }
+}
+
+@media (max-width: 575.98px) {
+  .disableIcon {
+      display: none;
+  }
+}
+
+@media (max-width: 475px) {
+  .fontSM {
+      font-size: 12px;
+  }
+}
+
+.roomPicker {
+  height: 145px;
+  width: 250px;
+}
+
+.buttonRoomPicker {
+  height: 40px;
+  width: 40px;
+}
+
+.buttonRoomPickerText {
+  pointer-events: none;
 }

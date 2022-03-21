@@ -21,6 +21,16 @@ export const bookingReducer = (state = initialState, action) => {
                 ...state,
                 booking: { ...state.booking, date: action.payload }
             }
+        case types.bookingAddAdults:
+            return {
+                ...state,
+                booking: { ...state.booking, adults: action.payload }
+            }
+        case types.bookingAddChildren:
+            return {
+                ...state,
+                booking: { ...state.booking, children: action.payload }
+            }
         case types.bookingClear:
             return {
                 booking: null

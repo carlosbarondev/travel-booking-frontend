@@ -11,6 +11,8 @@ export const types = {
     bookingInit: '[booking] Init booking',
     bookingAdd: '[booking] Add booking',
     bookingAddDate: '[booking] Add booking date',
+    bookingAddAdults: '[booking] Add booking adults',
+    bookingAddChildren: '[booking] Add booking children',
     bookingClear: '[booking] Logout',
 
 }

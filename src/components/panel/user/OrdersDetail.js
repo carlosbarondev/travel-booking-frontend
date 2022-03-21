@@ -11,7 +11,6 @@ export const OrdersDetail = () => {
 
     const location = useLocation();
     const { booking } = location.state;
-    console.log(booking)
     const { name } = useSelector(state => state.auth);
 
     const [modalShow, setModalShow] = useState(false);

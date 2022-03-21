@@ -43,4 +43,18 @@ export const bookingAddDate = (date) => {
     }
 }
 
+export const bookingAddAdults = (adults) => {
+    return {
+        type: types.bookingAddAdults,
+        payload: adults
+    }
+}
+
+export const bookingAddChildren = (children) => {
+    return {
+        type: types.bookingAddChildren,
+        payload: children
+    }
+}
+
 export const bookingClear = () => ({ type: types.bookingClear })

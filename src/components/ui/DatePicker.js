@@ -36,7 +36,7 @@ export const DatePicker = () => {
 
     const handleClick = (date) => {
         setState(date);
-        if (date[0].endDate !== state[0].endDate && date[0].endDate !== date[0].startDate) {
+        if (date[0].endDate !== date[0].startDate) {
             dispatch(bookingAddDate({
                 startDate: date[0].startDate.toISOString(),
                 endDate: date[0].endDate.toISOString()

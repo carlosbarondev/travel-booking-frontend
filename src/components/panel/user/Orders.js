@@ -29,7 +29,6 @@ export const Orders = () => {
                     return Swal.fire('Error', body.msg, 'error');
                 } else {
                     setBookings(body.bookings);
-                    console.log(body.bookings)
                     setChecking(true);
                 }
             } catch (error) {

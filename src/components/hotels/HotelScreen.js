@@ -1,14 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { Button, Col, Container, Form, Image, ListGroup, Row } from "react-bootstrap";
+import { Col, Container, Form, Image, ListGroup, Row } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import Swal from "sweetalert2";
 
 import { fetch_No_Token } from "../../helpers/fetch";
 import { bookingStartAdd } from "../../actions/booking";
-import { totalPriceBooking } from "../../helpers/totalPriceBooking";
-import { stepChange } from "../../actions/ui";
+import { DateBarHotel } from "./DateBarHotel";
 
 export const HotelScreen = () => {
 
@@ -17,7 +16,6 @@ export const HotelScreen = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    const { role } = useSelector(state => state.auth);
     const { booking } = useSelector(state => state.booking);
 
     const [hotel, setHotel] = useState();
@@ -29,7 +27,6 @@ export const HotelScreen = () => {
     const [persons, setPersons] = useState(2);
     const [food, setFood] = useState(null);
     const [parking, setParking] = useState({ type: "Sin Parking", price: 0 });
-    const [total, setTotal] = useState(0);
     const [checking, setChecking] = useState(false);
 
     useEffect(() => {
@@ -51,12 +48,11 @@ export const HotelScreen = () => {
             }
         }
         fetchData();
-    }, [HotelName, navigate, booking.date.startDate, booking.date.endDate]);
+    }, [HotelName, navigate, booking?.date.startDate, booking?.date.endDate]);
 
     useEffect(() => {
         if (checking) {
             dispatch(bookingStartAdd(hotel._id, rooms, days, roomId, roomType, persons, food, parking));
-            setTotal(totalPriceBooking(rooms, days, roomType, persons, food, parking));
         }
     }, [checking, hotel, rooms, days, roomId, roomType, persons, food, parking, dispatch])
 
@@ -87,16 +83,6 @@ export const HotelScreen = () => {
         }
     }
 
-    const handleStart = () => {
-        if (role !== "ADMIN_ROLE") {
-            dispatch(stepChange(2));
-            localStorage.setItem('step', 2);
-            navigate("/datos");
-        } else {
-            Swal.fire('Login', "Debe cerrar la sesión de Administrador y acceder como cliente", 'info');
-        }
-    }
-
     return (
         checking &&
         <>
@@ -111,9 +97,9 @@ export const HotelScreen = () => {
                         ratingValue={hotel.stars * 20}
                         allowHover={false}
                     />
-                    <h3>{total}€</h3>
                 </div>
             </div>
+            <DateBarHotel />
             <Container>
                 <div className="mt-5" style={{ "whiteSpace": "pre-wrap" }}>{hotel.description}</div>
                 <h3 className="mt-5">Elige tu habitación</h3>
@@ -265,11 +251,6 @@ export const HotelScreen = () => {
                     <Col xs={12} lg={4}>
                     </Col>
                 </Row>
-                <div className="d-grid mt-5 mb-5">
-                    <Button onClick={handleStart}>
-                        Continuar a datos personales {total}€
-                    </Button>
-                </div>
             </Container>
         </>
     )

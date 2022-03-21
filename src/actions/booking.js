@@ -36,6 +36,13 @@ export const bookingAdd = (booking) => {
     }
 }
 
+export const bookingAddCountry = (country) => {
+    return {
+        type: types.bookingAddCountry,
+        payload: country
+    }
+}
+
 export const bookingAddDate = (date) => {
     return {
         type: types.bookingAddDate,

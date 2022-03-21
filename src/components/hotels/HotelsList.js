@@ -15,16 +15,16 @@ export const HotelsList = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const resp = await fetch_No_Token(`hotels/?from_date=${booking.date.startDate}&to_date=${booking.date.endDate}`);
+                const resp = await fetch_No_Token(`hotels/?country=${booking.country}&from_date=${booking.date.startDate}&to_date=${booking.date.endDate}`);
                 const body = await resp.json();
-                setHotels(body.availableHotels);
+                setHotels(body.final);
                 setChecking(true);
             } catch (error) {
                 console.log(error);
             }
         }
         fetchData();
-    }, [booking.date.startDate, booking.date.endDate]);
+    }, [booking.country, booking.date.startDate, booking.date.endDate]);
 
     return (
         checking

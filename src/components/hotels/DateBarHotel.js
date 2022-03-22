@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 
 import { DatePicker } from "../ui/DatePicker";
 import { stepChange } from "../../actions/ui";
+import { RoomPicker } from "../ui/RoomPicker";
 
 export const DateBarHotel = () => {
 
@@ -57,20 +58,31 @@ export const DateBarHotel = () => {
                         </Dropdown>
                     </Col>
                     <Col xs={6} lg={4} className="p-1 py-lg-1 ps-0 pe-lg-0">
-                        <div className="d-grid">
-                            <Button
-                                className="border-0 rounded-0 shadow-none"
-                                style={{ "backgroundColor": "white", "color": "black", "fontSize": "14px" }}
-                                variant="primary" size="lg"
-                            >
-                                <div className="float-start d-flex">
-                                    <div className="disableIcon" style={{ "width": "45px" }}>
-                                        <i className="fa-solid fa-user-large fa-xl me-2" style={{ "color": "#BDBDBD" }}></i>
+                        <Dropdown id="dropDownRoom">
+                            <div className="d-grid">
+                                <Dropdown.Toggle
+                                    id="dropdown-basic"
+                                    className="border-0 rounded-0 shadow-none"
+                                    style={{ "backgroundColor": "white", "color": "black", "fontSize": "14px" }}
+                                    variant="primary"
+                                    size="lg"
+                                >
+                                    <div className="float-start d-flex">
+                                        <div style={{ "width": "45px" }}>
+                                            <i className="fa-solid fa-user-large fa-xl me-2" style={{ "color": "#BDBDBD" }}></i>
+                                        </div>
+                                        {
+                                            booking?.adults
+                                                ? <strong>{booking.adults} {booking.adults === 1 ? "adulto" : "adultos"} - {booking.children} {booking.children === 1 ? "niño" : "niños"}</strong>
+                                                : <strong>2 adultos - 0 niños</strong>
+                                        }
                                     </div>
-                                    <strong className="fontSM">2 adultos - 0 niños</strong>
-                                </div>
-                            </Button>
-                        </div>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    <RoomPicker />
+                                </Dropdown.Menu>
+                            </div>
+                        </Dropdown>
                     </Col>
                     <Col xs={12} lg={4} className="p-1 pt-0 pt-lg-1">
                         <div className="d-grid">

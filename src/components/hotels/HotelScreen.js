@@ -63,6 +63,13 @@ export const HotelScreen = () => {
                 if (!free) {
                     return Swal.fire('No disponible', `No hay habitaciones ${content.type} disponibles`, 'info');
                 } else {
+                    let family;
+                    if ((booking.adults > 2) || (booking.children > 1) || (booking.adults === 2 && booking.children > 0)) {
+                        family = true;
+                    }
+                    if (family && content.type !== "Familiar") {
+                        return Swal.fire('No disponible', `Máximo dos adultos`, 'info');
+                    }
                     document.getElementById(content.type).checked ? document.getElementById(content.type).checked = false : document.getElementById(content.type).checked = true;
                     if (document.getElementById(content.type).checked) {
                         setRoomId(free._id);
@@ -134,7 +141,7 @@ export const HotelScreen = () => {
                             />
                             <Image className="w-100" src={hotel.familyRoom.img} fluid />
                             <h4 className="mt-3 ms-3">Familiar</h4>
-                            <div className="text-muted ms-3"><i className="fa-solid fa-bed"></i> Capacidad: 2 adultos</div>
+                            <div className="text-muted ms-3"><i className="fa-solid fa-bed"></i> Capacidad: 4 adultos</div>
                             <h5 className="mt-2 text-muted ms-3">Espacio para toda la familia</h5>
                             <div className="mt-auto me-3">
                                 <h3 className="text-end mt-4">Desde {hotel.familyRoom.price}€</h3>

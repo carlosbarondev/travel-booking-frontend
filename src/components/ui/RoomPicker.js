@@ -3,8 +3,9 @@ import { useDispatch } from "react-redux";
 import { Button, ButtonGroup } from "react-bootstrap"
 
 import { bookingAddAdults, bookingAddChildren } from "../../actions/booking";
+import { uncheckRadio } from "../../helpers/uncheckRadio";
 
-export const RoomPicker = () => {
+export const RoomPicker = ({ open }) => {
 
     const dispatch = useDispatch();
 
@@ -19,29 +20,33 @@ export const RoomPicker = () => {
     const handleAddAdult = () => {
         if (adults < 4) {
             setAdults(adults + 1);
+            uncheckRadio();
         }
     }
 
     const handleSubAdult = () => {
         if (adults >= 2) {
             setAdults(adults - 1);
+            uncheckRadio();
         }
     }
 
     const handleAddChildren = () => {
         if (children < 5) {
             setChildren(children + 1);
+            uncheckRadio();
         }
     }
 
     const handleSubChildren = () => {
         if (children >= 1) {
             setChildren(children - 1);
+            uncheckRadio();
         }
     }
 
     return (
-        <div className="roomPicker">
+        !open && <div className="roomPicker">
             <div style={{ "position": "relative" }}>
                 <div style={{ "position": "absolute", "top": "20px" }}>
                     <strong style={{ "position": "absolute", "top": "7px", "left": "25px" }}>Adultos</strong>

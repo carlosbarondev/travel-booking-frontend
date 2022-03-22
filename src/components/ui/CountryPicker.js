@@ -5,7 +5,7 @@ import { ListGroup } from "react-bootstrap";
 import { fetch_No_Token } from "../../helpers/fetch";
 import { bookingAddCountry } from "../../actions/booking";
 
-export const CountryPicker = () => {
+export const CountryPicker = ({ open }) => {
 
     const dispatch = useDispatch();
 
@@ -33,11 +33,11 @@ export const CountryPicker = () => {
     }
 
     return (
-        checking && <ListGroup>
+        !open && checking && <ListGroup>
             {
                 countries.map(country =>
                     <ListGroup.Item key={country} action onClick={() => handleClick(country)}>
-                        {country}
+                        <strong>{country}</strong>
                     </ListGroup.Item>
                 )
             }

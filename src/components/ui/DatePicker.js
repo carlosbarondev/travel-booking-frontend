@@ -6,8 +6,9 @@ import { es } from 'date-fns/locale'
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { bookingAddDate } from '../../actions/booking';
+import { uncheckRadio } from '../../helpers/uncheckRadio';
 
-export const DatePicker = () => {
+export const DatePicker = ({ open }) => {
 
     const dispatch = useDispatch();
 
@@ -41,13 +42,14 @@ export const DatePicker = () => {
                 startDate: date[0].startDate.toISOString(),
                 endDate: date[0].endDate.toISOString()
             }));
+            uncheckRadio();
             const ele1 = document.getElementById("dropDownDate");
             ele1.click('open');
         }
     }
 
     return (
-        checking && <DateRangePicker
+        !open && checking && <DateRangePicker
             locale={es}
             onChange={item => handleClick([item.selection])}
             showSelectionPreview={true}

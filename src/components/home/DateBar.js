@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Col, Container, Dropdown, Row } from "react-bootstrap"
@@ -9,16 +10,29 @@ import { CountryPicker } from "../ui/CountryPicker";
 
 export const DateBar = () => {
 
+    const navigate = useNavigate();
+
     const { booking } = useSelector(state => state.booking);
 
-    const navigate = useNavigate();
+    const [open1, setOpen1] = useState();
+    const [open2, setOpen2] = useState();
+    const [open3, setOpen3] = useState();
 
     return (
         <div className="homeDateBar">
             <Container className="bg-warning">
                 <Row>
                     <Col xs={12} lg={3} className="p-1">
-                        <Dropdown id="dropDownCountry">
+                        <Dropdown
+                            id="dropDownCountry"
+                            onToggle={(isOpen) => {
+                                if (isOpen) {
+                                    setOpen1(false);
+                                } else {
+                                    setOpen1(true);
+                                }
+                            }}
+                        >
                             <div className="d-grid">
                                 <Dropdown.Toggle
                                     id="dropdown-basic"
@@ -39,13 +53,22 @@ export const DateBar = () => {
                                     </div>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <CountryPicker />
+                                    <CountryPicker open={open1} />
                                 </Dropdown.Menu>
                             </div>
                         </Dropdown>
                     </Col>
                     <Col xs={12} lg={4} className="p-1 py-0 py-lg-1 ps-lg-0 pe-lg-0">
-                        <Dropdown id="dropDownDate">
+                        <Dropdown
+                            id="dropDownDate"
+                            onToggle={(isOpen) => {
+                                if (isOpen) {
+                                    setOpen2(false);
+                                } else {
+                                    setOpen2(true);
+                                }
+                            }}
+                        >
                             <div className="d-grid">
                                 <Dropdown.Toggle
                                     id="dropdown-basic"
@@ -66,13 +89,22 @@ export const DateBar = () => {
                                     </div>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <DatePicker />
+                                    <DatePicker open={open2} />
                                 </Dropdown.Menu>
                             </div>
                         </Dropdown>
                     </Col>
                     <Col xs={12} lg={3} className="p-1">
-                        <Dropdown id="dropDownRoom">
+                        <Dropdown
+                            id="dropDownRoom"
+                            onToggle={(isOpen) => {
+                                if (isOpen) {
+                                    setOpen3(false);
+                                } else {
+                                    setOpen3(true);
+                                }
+                            }}
+                        >
                             <div className="d-grid">
                                 <Dropdown.Toggle
                                     id="dropdown-basic"
@@ -93,7 +125,7 @@ export const DateBar = () => {
                                     </div>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
-                                    <RoomPicker />
+                                    <RoomPicker open={open3} />
                                 </Dropdown.Menu>
                             </div>
                         </Dropdown>

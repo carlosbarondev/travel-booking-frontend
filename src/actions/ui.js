@@ -6,17 +6,3 @@ export const stepChange = (step) => {
         payload: step,
     }
 }
-
-export const shippingModalChange = (e) => {
-    return {
-        type: types.shippingModalChange,
-        payload: e
-    }
-}
-
-export const shippingModalChoose = (e) => {
-    return {
-        type: types.shippingModalChoose,
-        payload: e
-    }
-}

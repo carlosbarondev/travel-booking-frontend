@@ -15,7 +15,13 @@ export const HotelsList = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const resp = await fetch_No_Token(`hotels/?country=${booking.country}&from_date=${booking.date.startDate}&to_date=${booking.date.endDate}`);
+                let family;
+                if ((booking.adults > 2) || (booking.children > 1) || (booking.adults === 2 && booking.children > 0)) {
+                    family = true;
+                } else {
+                    family = false;
+                }
+                const resp = await fetch_No_Token(`hotels/?country=${booking.country}&from_date=${booking.date.startDate}&to_date=${booking.date.endDate}&family=${family}`);
                 const body = await resp.json();
                 setHotels(body.final);
                 setChecking(true);
@@ -24,7 +30,7 @@ export const HotelsList = () => {
             }
         }
         fetchData();
-    }, [booking.country, booking.date.startDate, booking.date.endDate]);
+    }, [booking.country, booking.date.startDate, booking.date.endDate, booking.adults, booking.children]);
 
     return (
         checking

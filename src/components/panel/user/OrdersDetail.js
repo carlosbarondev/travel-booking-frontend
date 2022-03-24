@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
 import { normalizeText } from 'normalize-text';
+import { lightFormat } from 'date-fns';
 
 import { invoicePdf } from "../../../helpers/invoicePdf";
 import { SummaryModal } from "../../payment/summary/SummaryModal";
@@ -27,7 +28,7 @@ export const OrdersDetail = () => {
                 </Card.Header>
                 <Card.Body>
                     <Row>
-                        <Col xs={12} sm={4}>
+                        <Col xs={12} sm={5}>
                             <Card.Title>Dirección de facturación</Card.Title>
                             <Card.Text>
                                 {name}
@@ -41,13 +42,7 @@ export const OrdersDetail = () => {
                                 {booking.user.billing.country}
                             </Card.Text>
                         </Col>
-                        <Col xs={12} sm={3} className="mt-4 mt-sm-0">
-                            <Card.Title>Dirección de envío</Card.Title>
-                            <Card.Text>
-
-                            </Card.Text>
-                        </Col>
-                        <Col xs={12} sm={3} className="mt-4 mt-sm-0">
+                        <Col xs={12} sm={5} className="mt-4 mt-sm-0">
                             <Card.Title>Método de pago</Card.Title>
                             <Card.Text>
                                 <Image className="mg-fluid" style={{ "height": "25px" }} src="https://images-na.ssl-images-amazon.com/images/G/30/checkout/payselect/card-logos-small/visa._CB658923706_.gif" />
@@ -75,7 +70,7 @@ export const OrdersDetail = () => {
                         </Col>
                         <Col xs={9} sm={9} md={5}>
                             <Link className="linkHotel" style={{ "fontSize": "18px" }} to={`/hoteles/${normalizeText(booking.hotel.name.replace(/\s+/g, "-"))}`}>{booking.hotel.name}</Link>
-                            <div style={{ "fontWeight": "normal", "fontSize": "14px" }}>Habitaciones: {booking.booking.rooms}</div>
+                            <div style={{ "fontSize": "14px" }}>Estancia: {lightFormat(new Date(booking.booking.date.startDate), 'dd/MM/yyyy')} - {lightFormat(new Date(booking.booking.date.endDate), 'dd/MM/yyyy')} {`${booking.booking.days === 1 ? `(${booking.booking.days} noche)` : `(${booking.booking.days} noches)`}`}</div>
                             <b>{booking.total}€</b>
                         </Col>
                         <Col xs={12} sm={12} md={5} className="text-center mt-3">

@@ -37,8 +37,8 @@ export const BookingDetails = ({ hotel }) => {
                 <Card.Header as="h5">DETALLES DE LA RESERVA</Card.Header>
                 <Card.Body>
                     <Card.Title>
-                        <span>
-                            <span style={{ "whiteSpace": "nowrap", "overflow": "hidden" }}>{hotel.name}</span>
+                        <span style={{ "whiteSpace": "nowrap", "overflow": "hidden" }}>
+                            <span>{hotel.name}</span>
                             <Rating
                                 className='ms-2 mb-2'
                                 style={{ "pointerEvents": "none" }}
@@ -70,7 +70,7 @@ export const BookingDetails = ({ hotel }) => {
                         {
                             booking?.roomType
                                 ? <div className="fontSM"><span className="text-muted me-3">Habitación</span><span className='float-end'>{booking.roomType.type}</span></div>
-                                : <div className="fontSM"><span className="text-muted me-3">Habitación</span><span className='float-end'>Selecciona una habitación</span></div>
+                                : <div className="fontSM"><span className="text-muted me-3">Habitación</span><span className='disableTextLg float-end'>Selecciona una habitación</span><span className='enableTextLg float-end'>Seleccionar</span></div>
                         }
                         {
                             booking?.food

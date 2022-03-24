@@ -56,7 +56,7 @@ export const invoicePdf = (name, summary) => {
                 text: `\n\n\n`
             },
             {
-                text: `Si tienes preguntas sobre tus pedidos, visita https://github.com/carlosbarondev`,
+                text: `Si tienes preguntas sobre tu reserva, visita https://github.com/carlosbarondev`,
                 style: "small"
             },
             { canvas: [{ type: 'line', x1: 0, y1: 5, x2: 595 - 2 * 40, y2: 5, lineWidth: 1 }] },
@@ -107,13 +107,13 @@ export const invoicePdf = (name, summary) => {
                     {
                         text: [
                             {
-                                text: `Información del pedido`,
+                                text: `Información de la reserva`,
                                 style: 'subheader'
                             },
                             {
                                 text: `
-                                    Fecha del pedido: ${new Date(date).toLocaleDateString("es-ES", options)}
-                                    Número del pedido: ${summary.idBooking}
+                                    Fecha de la reserva: ${new Date(date).toLocaleDateString("es-ES", options)}
+                                    Número de reserva: ${summary.idBooking}
                                 `
                             }
                         ]
@@ -136,7 +136,7 @@ export const invoicePdf = (name, summary) => {
             {
                 style: 'tableExample',
                 table: {
-                    widths: [180, '*', '*', '*', '*'],
+                    widths: [180, '*', 100, '*', '*'],
                     body: rows
                 }
             },

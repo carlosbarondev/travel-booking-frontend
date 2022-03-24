@@ -12,6 +12,7 @@ export const PaymentStepper = () => {
     const navigate = useNavigate();
 
     const { step } = useSelector(state => state.ui);
+    const { booking } = useSelector(state => state.booking);
 
     const [checking, setChecking] = useState(false);
 
@@ -33,19 +34,19 @@ export const PaymentStepper = () => {
             connectorStateColors
         >
             <Step
-                label="Cesta"
+                label="Reserva"
                 children={step > 1 ? <div><i className="fa-solid fa-check"></i></div> : 1}
                 onClick={() => {
-                    navigate("/cart");
+                    navigate(`/hoteles/${booking.idHotel}`);
                     handleClick(1);
                 }}
             />
             <Step
-                label="Dirección de envío"
+                label="Dirección de facturación"
                 children={step > 2 ? <div><i className="fa-solid fa-check"></i></div> : 2}
                 disabled={step < 2}
                 onClick={() => {
-                    navigate("/shipping");
+                    navigate("/datos");
                     handleClick(2);
                 }}
             />
@@ -53,10 +54,10 @@ export const PaymentStepper = () => {
                 label="Método de pago"
                 children={step > 3 ? <div><i className="fa-solid fa-check"></i></div> : 3}
                 disabled={step < 3}
-                onClick={() => {
-                    navigate("/payment");
+                /*onClick={() => {
+                    navigate("/pago");
                     handleClick(3);
-                }}
+                }}*/
             />
             <Step
                 label="Resumen"

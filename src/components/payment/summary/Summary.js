@@ -4,6 +4,7 @@ import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Button, Card, Col, Container, Image, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { normalizeText } from 'normalize-text';
+import { lightFormat } from 'date-fns';
 
 import { fetch_Token } from "../../../helpers/fetch";
 import { SummaryModal } from "./SummaryModal";
@@ -147,7 +148,7 @@ export const Summary = () => {
                         </Col>
                         <Col xs={9} sm={9} md={4}>
                             <Link className="linkHotel" style={{ "fontSize": "18px" }} to={`/hoteles/${normalizeText(summary.hotel.name.replace(/\s+/g, "-"))}`}>{summary.hotel.name}</Link>
-                            <div style={{ "fontWeight": "normal", "fontSize": "14px" }}>Habitaciones: {summary.booking.rooms}</div>
+                            <div style={{ "fontWeight": "normal", "fontSize": "14px" }}>Estancia: {lightFormat(new Date(summary.booking.date.startDate), 'dd/MM/yyyy')} - {lightFormat(new Date(summary.booking.date.endDate), 'dd/MM/yyyy')} {`${summary.booking.days === 1 ? `(${summary.booking.days} noche)` : `(${summary.booking.days} noches)`}`}</div>
                             <b>{(summary.total)}€</b>
                         </Col>
                         <Col xs={12} sm={12} md={6} className="text-center mt-3">

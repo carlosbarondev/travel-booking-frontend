@@ -4,10 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, Card, Col, Image, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { normalizeText } from 'normalize-text';
+import { lightFormat } from 'date-fns';
 
 import { fetch_Token } from "../../../helpers/fetch";
 import { invoicePdf } from "../../../helpers/invoicePdf";
-
 
 export const Orders = () => {
 
@@ -38,6 +38,44 @@ export const Orders = () => {
         }
         fetchData();
     }, [uid]);
+
+    const handleCancel = (booking) => {
+        const limit = new Date();
+        limit.setDate(limit.getDate() + 2);
+        const startDate = new Date(booking.booking.date.startDate);
+        startDate.setDate(startDate.getDate());
+        if (startDate < new Date().getDate()) {
+            return Swal.fire('La fecha ya ha pasado', "", 'error');
+        } else if (startDate < limit) {
+            return Swal.fire('Quedan menos de tres días', "Ya no se puede cancelar la reserva", 'error');
+        } else {
+            Swal.fire({
+                title: '¿Está seguro?',
+                text: "No podrá revertir esto",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Cancelar reserva',
+                cancelButtonText: 'Volver'
+            }).then(async (result) => {
+                if (result.isConfirmed) {
+                    try {
+                        const resp = await fetch_Token(`bookings/${booking._id}`, {}, "DELETE");
+                        const body = await resp.json();
+                        if (body.msg) {
+                            return Swal.fire('Error', body.msg, 'error');
+                        } else {
+                            setBookings(bookings.filter(item => item._id !== booking._id));
+                        }
+                    } catch (error) {
+                        console.log(error);
+                        return Swal.fire('Error', error.message, 'error');
+                    }
+                }
+            })
+        }
+    }
 
     return (
         checking && <div className="animate__animated animate__fadeIn mt-4 mb-5">
@@ -72,7 +110,7 @@ export const Orders = () => {
                                     </Col>
                                     <Col className="mb-2">
                                         <Row className="me-1 disable-float">
-                                            Pedido nº {booking.idBooking}
+                                            Reserva nº {booking.idBooking}
                                         </Row>
                                         <Row className="disable-float">
                                             <span>
@@ -82,7 +120,7 @@ export const Orders = () => {
                                                     }
                                                 })}>Ver los detalles de la reserva</button>
                                                 <div className="vr ms-2 me-2"></div>
-                                                <button className="buttonLink" onClick={() => invoicePdf(name, booking)}>Factura PDF</button>
+                                                <button className="buttonLink" onClick={() => handleCancel(booking)}>Cancelar reserva</button>
                                             </span>
                                         </Row>
                                     </Col>
@@ -93,9 +131,20 @@ export const Orders = () => {
                                     <Col xs={2} md={1} className="d-flex justify-content-center align-items-center" style={{ "height": "5rem" }}>
                                         <Image style={{ "maxHeight": "70%" }} src={booking.hotel.img ? booking.hotel.img : "/assets/no-image.png"} fluid />
                                     </Col>
-                                    <Col xs={10} md={11}>
+                                    <Col xs={5} md={6}>
                                         <Link className="linkHotel" style={{ "fontSize": "18px" }} to={`/hoteles/${normalizeText(booking.hotel.name.replace(/\s+/g, "-"))}`}>{booking.hotel.name}</Link>
-                                        <div style={{ "fontSize": "14px" }}>Habitaciones: {booking.booking.rooms}</div>
+                                        <div style={{ "fontSize": "14px" }}>Estancia: {lightFormat(new Date(booking.booking.date.startDate), 'dd/MM/yyyy')} - {lightFormat(new Date(booking.booking.date.endDate), 'dd/MM/yyyy')} {`${booking.booking.days === 1 ? `(${booking.booking.days} noche)` : `(${booking.booking.days} noches)`}`}</div>
+                                    </Col>
+                                    <Col xs={5} md={5} className="text-center mt-2">
+                                        <div className="d-grid">
+                                            <Button
+                                                variant="outline-secondary"
+                                                size="sm"
+                                                onClick={() => invoicePdf(name, booking)}
+                                            >
+                                                Imprimir factura
+                                            </Button>
+                                        </div>
                                     </Col>
                                 </Row>
                             </Card.Body>

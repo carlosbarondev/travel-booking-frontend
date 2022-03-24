@@ -124,7 +124,7 @@ export const HotelScreen = () => {
                 </div>
                 <div className="mt-3" style={{ "whiteSpace": "pre-wrap" }}>{hotel.description}</div>
                 <Row>
-                    <Col xs={8} className="mt-5">
+                    <Col xs={12} lg={8} className="mt-5">
                         <h3>Elige tu habitación</h3>
                         <Row className="border mt-4 mx-1" onClick={() => handleSelect("roomType", { type: "Doble", price: hotel.doubleRoom.price })} style={{ "cursor": "pointer" }}>
                             <Col xs={5} className="p-0">
@@ -267,7 +267,7 @@ export const HotelScreen = () => {
                             </Col>
                         </Row>
                     </Col>
-                    <Col xs={4} className="mt-5">
+                    <Col xs={12} lg={4} className="mt-5">
                         <BookingDetails hotel={hotel} />
                     </Col>
                 </Row>

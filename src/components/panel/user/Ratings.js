@@ -126,7 +126,7 @@ export const Ratings = () => {
                                                             size="sm"
                                                             onClick={() => setModalShowNotValued(op._id)}
                                                         >
-                                                            <span className="disable-card-header">Escribir una opinión sobre el producto</span>
+                                                            <span className="disable-card-header">Escribir una opinión sobre la reserva</span>
                                                             <span className="enable-card-header">Valorar</span>
                                                         </Button>
                                                     </div>
@@ -178,7 +178,7 @@ export const Ratings = () => {
                                                             size="sm"
                                                             onClick={() => setModalShowValued(op._id)}
                                                         >
-                                                            Editar opinión del producto
+                                                            Editar opinión de la reserva
                                                         </Button>
                                                     </div>
                                                     <div>

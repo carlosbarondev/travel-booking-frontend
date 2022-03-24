@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Button, Col, Container, Dropdown, Row } from "react-bootstrap"
 import { lightFormat } from 'date-fns';
+import Swal from "sweetalert2";
 
 import { DatePicker } from "../ui/DatePicker";
 import { RoomPicker } from "../ui/RoomPicker";
@@ -17,6 +18,16 @@ export const DateBar = () => {
     const [open1, setOpen1] = useState();
     const [open2, setOpen2] = useState();
     const [open3, setOpen3] = useState();
+
+    const handleStart = () => {
+        if (!booking.country) {
+            return Swal.fire('Seleccione un destino', ``, 'info');
+        }
+        if (!booking.date) {
+            return Swal.fire('Seleccione una fecha', ``, 'info');
+        }
+        navigate("/hoteles");
+    }
 
     return (
         <div className="homeDateBar">
@@ -117,11 +128,9 @@ export const DateBar = () => {
                                         <div style={{ "width": "45px" }}>
                                             <i className="fa-solid fa-user-large fa-xl me-2" style={{ "color": "#BDBDBD" }}></i>
                                         </div>
-                                        {
-                                            booking?.adults
-                                                ? <strong>{booking.adults} {booking.adults === 1 ? "adulto" : "adultos"} - {booking.children} {booking.children === 1 ? "niño" : "niños"}</strong>
-                                                : <strong>2 adultos - 0 niños</strong>
-                                        }
+                                        <strong>
+                                            {booking.adults} {booking.adults === 1 ? "adulto" : "adultos"} - {booking.children} {booking.children === 1 ? "niño" : "niños"}
+                                        </strong>
                                     </div>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
@@ -137,7 +146,7 @@ export const DateBar = () => {
                                 style={{ "fontSize": "14px" }}
                                 variant="primary"
                                 size="lg"
-                                onClick={() => navigate("/hoteles")}
+                                onClick={handleStart}
                             >
                                 <strong>Buscar</strong>
                             </Button>

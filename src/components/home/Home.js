@@ -6,6 +6,7 @@ import { DateBar } from "./DateBar"
 import { DiscoverList } from "./DiscoverList"
 
 export const Home = () => {
+
     return (
         <>
             <Banner />

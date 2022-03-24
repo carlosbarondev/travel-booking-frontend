@@ -27,78 +27,74 @@ export const DateBarHotel = () => {
     }
 
     return (
-        <div className="sticky">
-            <Container className="bg-warning">
-                <Row>
-                    <Col xs={6} lg={4} className="p-1">
-                        <Dropdown id="dropDownDate">
-                            <div className="d-grid">
-                                <Dropdown.Toggle
-                                    id="dropdown-basic"
-                                    className="border-0 rounded-0 shadow-none"
-                                    style={{ "backgroundColor": "white", "color": "black", "fontSize": "14px" }}
-                                    variant="primary"
-                                    size="lg"
-                                >
-                                    <div className="float-start d-flex">
-                                        <div className="disableIcon" style={{ "width": "45px" }}>
-                                            <i className="fa-solid fa-calendar-days fa-xl me-2" style={{ "color": "#BDBDBD" }}></i>
-                                        </div>
-                                        {
-                                            booking?.date
-                                                ? <strong className="fontSM">{lightFormat(new Date(booking.date.startDate), 'dd/MM/yyyy')} - {lightFormat(new Date(booking.date.endDate), 'dd/MM/yyyy')}</strong>
-                                                : <strong className="fontSM">Check-in - Check-out</strong>
-                                        }
-                                    </div>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <DatePicker />
-                                </Dropdown.Menu>
-                            </div>
-                        </Dropdown>
-                    </Col>
-                    <Col xs={6} lg={4} className="p-1 py-lg-1 ps-0 pe-lg-0">
-                        <Dropdown id="dropDownRoom">
-                            <div className="d-grid">
-                                <Dropdown.Toggle
-                                    id="dropdown-basic"
-                                    className="border-0 rounded-0 shadow-none"
-                                    style={{ "backgroundColor": "white", "color": "black", "fontSize": "14px" }}
-                                    variant="primary"
-                                    size="lg"
-                                >
-                                    <div className="float-start d-flex">
-                                        <div style={{ "width": "45px" }}>
-                                            <i className="fa-solid fa-user-large fa-xl me-2" style={{ "color": "#BDBDBD" }}></i>
-                                        </div>
-                                        {
-                                            booking?.adults
-                                                ? <strong>{booking.adults} {booking.adults === 1 ? "adulto" : "adultos"} - {booking.children} {booking.children === 1 ? "niño" : "niños"}</strong>
-                                                : <strong>2 adultos - 0 niños</strong>
-                                        }
-                                    </div>
-                                </Dropdown.Toggle>
-                                <Dropdown.Menu>
-                                    <RoomPicker />
-                                </Dropdown.Menu>
-                            </div>
-                        </Dropdown>
-                    </Col>
-                    <Col xs={12} lg={4} className="p-1 pt-0 pt-lg-1">
+        <Container className="bg-warning">
+            <Row>
+                <Col xs={6} lg={4} className="p-1">
+                    <Dropdown id="dropDownDate">
                         <div className="d-grid">
-                            <Button
+                            <Dropdown.Toggle
+                                id="dropdown-basic"
                                 className="border-0 rounded-0 shadow-none"
-                                style={{ "fontSize": "14px" }}
+                                style={{ "backgroundColor": "white", "color": "black", "fontSize": "14px" }}
                                 variant="primary"
                                 size="lg"
-                                onClick={handleStart}
                             >
-                                <strong>Reservar {booking.total ? `${booking.total}€` : null}</strong>
-                            </Button>
+                                <div className="float-start d-flex">
+                                    <div className="disableIcon" style={{ "width": "45px" }}>
+                                        <i className="fa-solid fa-calendar-days fa-xl me-2" style={{ "color": "#BDBDBD" }}></i>
+                                    </div>
+                                    {
+                                        booking?.date
+                                            ? <strong className="fontSM">{lightFormat(new Date(booking.date.startDate), 'dd/MM/yyyy')} - {lightFormat(new Date(booking.date.endDate), 'dd/MM/yyyy')}</strong>
+                                            : <strong className="fontSM">Check-in - Check-out</strong>
+                                    }
+                                </div>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <DatePicker />
+                            </Dropdown.Menu>
                         </div>
-                    </Col>
-                </Row>
-            </Container>
-        </div>
+                    </Dropdown>
+                </Col>
+                <Col xs={6} lg={4} className="p-1 py-lg-1 ps-0 pe-lg-0">
+                    <Dropdown id="dropDownRoom">
+                        <div className="d-grid">
+                            <Dropdown.Toggle
+                                id="dropdown-basic"
+                                className="border-0 rounded-0 shadow-none"
+                                style={{ "backgroundColor": "white", "color": "black", "fontSize": "14px" }}
+                                variant="primary"
+                                size="lg"
+                            >
+                                <div className="float-start d-flex">
+                                    <div style={{ "width": "45px" }}>
+                                        <i className="fa-solid fa-user-large fa-xl me-2" style={{ "color": "#BDBDBD" }}></i>
+                                    </div>
+                                    <strong>
+                                        {booking.adults} {booking.adults === 1 ? "adulto" : "adultos"} - {booking.children} {booking.children === 1 ? "niño" : "niños"}
+                                    </strong>
+                                </div>
+                            </Dropdown.Toggle>
+                            <Dropdown.Menu>
+                                <RoomPicker />
+                            </Dropdown.Menu>
+                        </div>
+                    </Dropdown>
+                </Col>
+                <Col xs={12} lg={4} className="p-1 pt-0 pt-lg-1">
+                    <div className="d-grid">
+                        <Button
+                            className="border-0 rounded-0 shadow-none"
+                            style={{ "fontSize": "14px" }}
+                            variant="primary"
+                            size="lg"
+                            onClick={handleStart}
+                        >
+                            <strong>Reservar {booking.total ? `${booking.total}€` : null}</strong>
+                        </Button>
+                    </div>
+                </Col>
+            </Row>
+        </Container>
     )
 }

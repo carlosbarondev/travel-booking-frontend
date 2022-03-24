@@ -9,8 +9,8 @@ export const invoicePdf = (name, summary) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
     let rows = [];
-    rows.push(['Descripción', 'Habitaciones', 'Régimen', "Parking", 'Precio Total']);
-    rows.push([summary.hotel.name + " habitación " + summary.booking.roomType.type, summary.booking.rooms, summary.booking.food.type, summary.booking.parking.type, summary.booking.total]);
+    rows.push(['Descripción', 'Habitación', 'Régimen', "Parking", 'Precio Total']);
+    rows.push([summary.hotel.name, summary.booking.roomType.type, summary.booking.food.type, summary.booking.parking?.type ? summary.booking.parking?.type : "Sin parking", summary.booking.total]);
 
     const docDefinition = {
         content: [
@@ -136,7 +136,7 @@ export const invoicePdf = (name, summary) => {
             {
                 style: 'tableExample',
                 table: {
-                    widths: [220, '*', 90, '*', '*'],
+                    widths: [180, '*', '*', '*', '*'],
                     body: rows
                 }
             },

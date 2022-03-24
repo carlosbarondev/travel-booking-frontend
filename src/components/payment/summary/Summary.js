@@ -8,7 +8,7 @@ import { normalizeText } from 'normalize-text';
 import { fetch_Token } from "../../../helpers/fetch";
 import { SummaryModal } from "./SummaryModal";
 import { invoicePdf } from "../../../helpers/invoicePdf";
-import { bookingClear } from "../../../actions/booking";
+import { bookingAddAdults, bookingAddChildren, bookingAddDate, bookingAddDays, bookingClear } from "../../../actions/booking";
 
 export const Summary = () => {
 
@@ -45,7 +45,8 @@ export const Summary = () => {
                     if (bodyUser.msg) { // Si hay errores
                         Swal.fire('Error', bodyUser.msg, 'error');
                     } else {
-                        console.log(booking)
+                        const d = new Date(booking.date.endDate);
+                        d.setDate(d.getDate() - 1); // Se resta 1 a la fecha de salida porque no es un día reservado
                         const send = await fetch_Token(`bookings`, {
                             idBooking: searchParams.get("payment_intent"),
                             user: uid,
@@ -57,7 +58,7 @@ export const Summary = () => {
                             total: body.paymentIntent.amount,
                             room: booking.roomId,
                             start: booking.date.startDate,
-                            end: booking.date.endDate
+                            end: d.toISOString()
                         }, 'POST');
 
                         const bodyBooking = await send.json();
@@ -75,6 +76,15 @@ export const Summary = () => {
                             localStorage.removeItem("booking");
                             dispatch(bookingClear());
                             localStorage.setItem('order', JSON.stringify(bodyBooking));
+                            const d = new Date();
+                            d.setDate(d.getDate() + 2)
+                            dispatch(bookingAddDate({
+                                startDate: new Date().toISOString(),
+                                endDate: d.toISOString()
+                            }));
+                            dispatch(bookingAddDays(2));
+                            dispatch(bookingAddAdults(2));
+                            dispatch(bookingAddChildren(0));
                             setChecking(true);
                         }
 

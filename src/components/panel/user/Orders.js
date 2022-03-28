@@ -40,11 +40,13 @@ export const Orders = () => {
     }, [uid]);
 
     const handleCancel = (booking) => {
+        const today = new Date();
+        today.setDate(today.getDate() - 1);
         const limit = new Date();
         limit.setDate(limit.getDate() + 2);
         const startDate = new Date(booking.booking.date.startDate);
         startDate.setDate(startDate.getDate());
-        if (startDate < new Date().getDate()) {
+        if (startDate < today) {
             return Swal.fire('La fecha ya ha pasado', "", 'error');
         } else if (startDate < limit) {
             return Swal.fire('Quedan menos de tres días', "Ya no se puede cancelar la reserva", 'error');

@@ -27,7 +27,7 @@ export const FilterHotel = ({ hotels, setFiltered }) => {
         <Card>
             <Card.Header as="h5">¿Cómo quieres que sea tu hotel?</Card.Header>
             <Card.Body>
-                <Card.Title>ESTRELLAS</Card.Title>
+                <div style={{ "fontSize": "17px" }}>ESTRELLAS</div>
                 <Form>
                     {['Cualquiera', '5', '4', '3'].map((type) => (
                         <Form.Check
@@ -48,7 +48,7 @@ export const FilterHotel = ({ hotels, setFiltered }) => {
                         />
                     ))}
                 </Form>
-                <Card.Title>ORDENAR POR</Card.Title>
+                <div className="mt-3" style={{ "fontSize": "17px" }}>ORDENAR POR</div>
                 <Form>
                     {['Precio', 'Más visitados', 'Mejor valorados'].map((type) => (
                         <Form.Check

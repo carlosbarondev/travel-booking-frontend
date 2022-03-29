@@ -24,17 +24,25 @@ export const HotelsList = () => {
                 } else {
                     family = false;
                 }
-                const resp = await fetch_No_Token(`hotels/?country=${booking.country}&from_date=${booking.date.startDate}&to_date=${booking.date.endDate}&family=${family}`);
-                const body = await resp.json();
-                setHotels(body.final);
-                setFiltered(body.final.sort((a, b) => a.doubleRoom.price - b.doubleRoom.price));
-                setChecking(true);
+                if (booking?.date) {
+                    const resp = await fetch_No_Token(`hotels/?country=${booking.country}&from_date=${booking.date.startDate}&to_date=${booking.date.endDate}&family=${family}`);
+                    const body = await resp.json();
+                    setHotels(body.final);
+                    setFiltered(body.final.sort((a, b) => a.doubleRoom.price - b.doubleRoom.price));
+                    setChecking(true);
+                } else {
+                    const resp = await fetch_No_Token(`hotels`);
+                    const body = await resp.json();
+                    setHotels(body.hotels.filter(hotel => hotel.country === booking.country));
+                    setFiltered(body.hotels.filter(hotel => hotel.country === booking.country).sort((a, b) => a.doubleRoom.price - b.doubleRoom.price));
+                    setChecking(true);
+                }
             } catch (error) {
                 console.log(error);
             }
         }
         fetchData();
-    }, [booking.country, booking.date.startDate, booking.date.endDate, booking.adults, booking.children]);
+    }, [booking?.date, booking?.country, booking?.adults, booking?.children]);
 
     return (
         checking &&

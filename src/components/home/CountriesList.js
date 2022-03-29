@@ -1,10 +1,23 @@
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Col, Container, Image, Row } from "react-bootstrap"
 
+import { bookingAddCountry } from "../../actions/booking";
+
 export const CountriesList = () => {
+
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const handleCountry = (country) => {
+        dispatch(bookingAddCountry(country));
+        navigate("/hoteles");
+    }
+
     return (
         <Container className="mt-4">
             <Row>
-                <Col xs={12} md={6} className="p-md-0 pe-md-2 head-text">
+                <Col xs={12} md={6} className="p-md-0 pe-md-2 head-text" onClick={() => handleCountry("España")}>
                     <Image src="https://img.freepik.com/foto-gratis/espana-sevilla-plaza-espana-ejemplo-emblematico-estilo-renacentista-arquitectura-espanola_521059-6001.jpg?w=1380" fluid />
                     <div className='text-on-image'>
                         <h2>España</h2>

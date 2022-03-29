@@ -1,9 +1,8 @@
 import { Banner } from "./Banner"
-import { CategoriesList } from "./CategoriesList"
-import { CountriesList } from "./CountriesList"
-import { Covid } from "./Covid"
 import { DateBar } from "./DateBar"
-import { DiscoverList } from "./DiscoverList"
+import { Covid } from "./Covid"
+import { CountriesList } from "./CountriesList"
+import { BestHotels } from "./BestHotels"
 
 export const Home = () => {
 
@@ -13,8 +12,7 @@ export const Home = () => {
             <DateBar />
             <Covid />
             <CountriesList />
-            <CategoriesList />
-            <DiscoverList />
+            <BestHotels />
         </>
     )
 }

@@ -7,12 +7,12 @@ export const Footer = () => {
     const navigate = useNavigate();
 
     return (
-        <footer className="row row-cols-4 py-5 mt-auto border-top d-flex justify-content-around align-items-center animate__animated animate__fadeIn" style={{ "backgroundColor": "#f8f9fa", "overflow": "hidden", "padding": "0", "margin": "0" }}>
+        <footer className="row row-cols-4 py-5 mt-auto border-top d-flex justify-content-around align-items-center animate__animated animate__fadeIn" style={{ "backgroundColor": "#003580", "overflow": "hidden", "padding": "0", "margin": "0" }}>
 
             <div className="col-12 col-lg-4 mb-5 mb-lg-0">
                 <div className="d-flex flex-column justify-content-center align-items-center">
                     <Image
-                        src=""
+                        src="/assets/BARON.png"
                         alt="logo"
                         style={{ "cursor": "pointer", "maxWidth": "40%" }}
                         onClick={() => navigate("/")}

@@ -114,9 +114,10 @@
 }
 
 .linkFooter {
-  background-color: #f8f9fa;
+  background-color: #003580;
   font-size: 18px;
   text-decoration: none;
+  color: white !important;
 }
 
 .linkFooter:hover {
@@ -232,14 +233,74 @@
   }
 }
 
-@media (max-width: 991.98px) { 
+@media (max-width: 767.98px) { 
   .navbarDisableImg {
       display: none;
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .navbarEnableImg {
       display: none;
+  }
+}
+
+@media (min-width: 0px) { 
+  .containerBanner {
+    height: 150px;
+  }
+  .titleBanner {
+    font-size: 30px;
+  }
+  .subtitleBanner {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 576px) { 
+  .containerBanner {
+    height: 200px;
+  }
+  .titleBanner {
+    font-size: 36px;
+  }
+  .subtitleBanner {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 768px) { 
+  .containerBanner {
+    height: 210px;
+  }
+  .titleBanner {
+    font-size: 40px;
+  }
+  .subtitleBanner {
+    font-size: 20px;
+  }
+}
+
+@media (min-width: 992px) { 
+  .containerBanner {
+    height: 220px;
+  }
+  .titleBanner {
+    font-size: 46px;
+  }
+  .subtitleBanner {
+    font-size: 23px;
+  }
+}
+
+@media (min-width: 1200px) { 
+  .containerBanner {
+    height: 230px;
+  }
+  .titleBanner {
+    font-size: 50px;
+  }
+  .subtitleBanner {
+    font-size: 25px;
   }
 }

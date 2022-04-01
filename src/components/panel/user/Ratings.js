@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Button, Col, Image, Row, Tab, Tabs } from "react-bootstrap";
 import { Rating } from "react-simple-star-rating";
 import Swal from "sweetalert2";
@@ -9,12 +9,15 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import { fetch_Token } from "../../../helpers/fetch";
 import { SummaryModal } from "../../payment/summary/SummaryModal";
+import { initBooking } from "../../../helpers/initBooking";
 
 export const Ratings = () => {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const { uid } = useSelector(state => state.auth);
+    const { booking } = useSelector(state => state.booking);
 
     const [valued, setValued] = useState();
     const [notValued, setNotValued] = useState();
@@ -79,6 +82,11 @@ export const Ratings = () => {
         })
     }
 
+    const handleLink = (name) => {
+        initBooking(booking, dispatch);
+        navigate(`/hoteles/${normalizeText(name.replace(/\s+/g, "-"))}`);
+    }
+
     return (
         checking && <div className="animate__animated animate__fadeIn mt-4 mb-5">
             <h3 className="mb-4">Mis Valoraciones</h3>
@@ -108,7 +116,7 @@ export const Ratings = () => {
                                                     <Image style={{ "maxHeight": "80%" }} src={op.img ? op.img : "/assets/no-image.png"} fluid />
                                                 </Col>
                                                 <Col xs={8} sm={8} md={9} className="d-flex flex-column align-self-center">
-                                                    <Link className="linkHotel mb-1" style={{ "fontSize": "20px" }} to={`/hoteles/${normalizeText(op.name.replace(/\s+/g, "-"))}`}>{op.name}</Link>
+                                                    <div className="linkHotel mb-1" style={{ "fontSize": "20px", "cursor": "pointer" }} onClick={() => handleLink(op.name)}>{op.name}</div>
                                                     <span className="d-flex align-items-center">
                                                         <Rating
                                                             className="me-2 mb-1"
@@ -169,7 +177,7 @@ export const Ratings = () => {
                                                 </Col>
                                                 <Col xs={9} sm={9} md={9} lg={9} xl={3} className="d-flex flex-column">
                                                     <div>
-                                                        <Link className="linkHotel mb-1" style={{ "fontSize": "20px" }} to={`/hoteles/${normalizeText(op.name.replace(/\s+/g, "-"))}`}>{op.name}</Link>
+                                                        <div className="linkHotel mb-1" style={{ "fontSize": "20px", "cursor": "pointer" }} onClick={() => handleLink(op.name)}>{op.name}</div>
                                                     </div>
                                                     <div>
                                                         <Button

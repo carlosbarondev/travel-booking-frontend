@@ -88,7 +88,7 @@ export const Data = () => {
     const handleDeleteImage = async () => {
         if (img) {
             try {
-                const resp = await fetch_Token(`usuarios/${uid}`, {
+                const resp = await fetch_Token(`users/${uid}`, {
                     img: ""
                 }, 'PUT');
                 const body = await resp.json();

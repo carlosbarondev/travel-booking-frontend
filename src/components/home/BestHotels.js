@@ -6,7 +6,7 @@ import { Rating } from "react-simple-star-rating";
 import { normalizeText } from 'normalize-text';
 
 import { fetch_No_Token } from "../../helpers/fetch";
-import { bookingAddAdults, bookingAddChildren, bookingAddDate, bookingAddDays, bookingAddFood, bookingAddParking, bookingAddRoomId, bookingAddRoomType } from "../../actions/booking";
+import { initBooking } from "../../helpers/initBooking";
 
 export const BestHotels = () => {
 
@@ -33,33 +33,7 @@ export const BestHotels = () => {
     }, []);
 
     const handleHotel = (name) => {
-        if (!booking.date) {
-            const d = new Date();
-            d.setDate(d.getDate() + 2)
-            dispatch(bookingAddDate({
-                startDate: new Date().toISOString(),
-                endDate: d.toISOString()
-            }));
-            dispatch(bookingAddDays(2));
-        }
-        if (!booking.adults) {
-            dispatch(bookingAddAdults(2));
-        }
-        if (!booking.children) {
-            dispatch(bookingAddChildren(0));
-        }
-        if (booking.roomId) {
-            dispatch(bookingAddRoomId(null));
-        }
-        if (booking.roomType) {
-            dispatch(bookingAddRoomType(null));
-        }
-        if (booking.food) {
-            dispatch(bookingAddFood(null));
-        }
-        if (booking.parking) {
-            dispatch(bookingAddParking(null));
-        }
+        initBooking(booking, dispatch);
         navigate(`/hoteles/${normalizeText(name.replace(/\s+/g, "-"))}`);
     }
 

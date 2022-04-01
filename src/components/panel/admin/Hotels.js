@@ -1,15 +1,20 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { normalizeText } from 'normalize-text';
 
 import { fetch_Token } from "../../../helpers/fetch";
 import { HotelAddModal } from "./HotelAddModal";
+import { initBooking } from "../../../helpers/initBooking";
 
 export const Hotels = () => {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const { booking } = useSelector(state => state.booking);
 
     const [hotels, setHotels] = useState(false);
     const [modalShow, setModalShow] = useState(false);
@@ -29,6 +34,11 @@ export const Hotels = () => {
         }
         fetchData();
     }, []);
+
+    const handleLink = (name) => {
+        initBooking(booking, dispatch);
+        navigate(`/hoteles/${normalizeText(name.replace(/\s+/g, "-"))}`);
+    }
 
     return (
         checking && <div className="animate__animated animate__fadeIn mt-4 mb-5">
@@ -55,11 +65,7 @@ export const Hotels = () => {
                             <ListGroup.Item key={hotel._id}>
                                 <Row className="align-items-center">
                                     <Col xs={5} sm={4} md={4}>
-                                        <Link
-                                            className="linkHotel"
-                                            to={`/hoteles/${normalizeText(hotel.name.replace(/\s+/g, "-"))}`}>
-                                            {hotel.name}
-                                        </Link>
+                                        <div className="linkHotel" style={{ "cursor": "pointer" }} onClick={() => handleLink(hotel.name)}>{hotel.name}</div>
                                     </Col>
                                     <Col xs={0} sm={0} md={2} className="disable-card-header">
                                         {hotel.country}

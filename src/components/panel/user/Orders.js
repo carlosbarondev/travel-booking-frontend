@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { Button, Card, Col, Image, Row } from "react-bootstrap";
 import Swal from "sweetalert2";
 import { normalizeText } from 'normalize-text';
@@ -8,12 +8,15 @@ import { lightFormat } from 'date-fns';
 
 import { fetch_Token } from "../../../helpers/fetch";
 import { invoicePdf } from "../../../helpers/invoicePdf";
+import { initBooking } from "../../../helpers/initBooking";
 
 export const Orders = () => {
 
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const { name, uid } = useSelector(state => state.auth);
+    const { booking } = useSelector(state => state.booking);
 
     const [bookings, setBookings] = useState();
     const [checking, setChecking] = useState(false);
@@ -79,6 +82,20 @@ export const Orders = () => {
         }
     }
 
+    const handleLink = (name) => {
+        initBooking(booking, dispatch);
+        navigate(`/hoteles/${normalizeText(name.replace(/\s+/g, "-"))}`);
+    }
+
+    const handleDetail = (book) => {
+        initBooking(booking, dispatch);
+        navigate("/panel/reservas/detalles", {
+            state: {
+                booking: book
+            }
+        })
+    }
+
     return (
         checking && <div className="animate__animated animate__fadeIn mt-4 mb-5">
             <h3>Mis Reservas</h3>
@@ -116,11 +133,7 @@ export const Orders = () => {
                                         </Row>
                                         <Row className="disable-float">
                                             <span>
-                                                <button className="buttonLink" onClick={() => navigate("/panel/reservas/detalles", {
-                                                    state: {
-                                                        booking: booking
-                                                    }
-                                                })}>Ver los detalles de la reserva</button>
+                                                <button className="buttonLink" onClick={() => handleDetail(booking)}>Ver los detalles de la reserva</button>
                                                 <div className="vr ms-2 me-2"></div>
                                                 <button className="buttonLink" onClick={() => handleCancel(booking)}>Cancelar reserva</button>
                                             </span>
@@ -134,7 +147,7 @@ export const Orders = () => {
                                         <Image style={{ "maxHeight": "70%" }} src={booking.hotel.img ? booking.hotel.img : "/assets/no-image.png"} fluid />
                                     </Col>
                                     <Col xs={5} md={6}>
-                                        <Link className="linkHotel" style={{ "fontSize": "18px" }} to={`/hoteles/${normalizeText(booking.hotel.name.replace(/\s+/g, "-"))}`}>{booking.hotel.name}</Link>
+                                        <div className="linkHotel" style={{ "fontSize": "18px", "cursor": "pointer" }} onClick={() => handleLink(booking.hotel.name)}>{booking.hotel.name}</div>
                                         <div style={{ "fontSize": "14px" }}>Estancia: {lightFormat(new Date(booking.booking.date.startDate), 'dd/MM/yyyy')} - {lightFormat(new Date(booking.booking.date.endDate), 'dd/MM/yyyy')} {`${booking.booking.days === 1 ? `(${booking.booking.days} noche)` : `(${booking.booking.days} noches)`}`}</div>
                                     </Col>
                                     <Col xs={5} md={5} className="text-center mt-2">

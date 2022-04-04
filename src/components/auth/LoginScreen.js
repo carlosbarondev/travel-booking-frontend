@@ -46,10 +46,10 @@ export const LoginScreen = () => {
         <div className="d-flex flex-column align-items-center">
             <div className="text-center">
                 <Image
-                    src="/assets/logo_grande.png"
+                    src="/assets/logo.png"
                     alt="logo"
                     className='mt-5 mb-5'
-                    style={{ "cursor": "pointer", "maxWidth": "75%" }}
+                    style={{ "cursor": "pointer", "maxWidth": "50%" }}
                     onClick={() => navigate("/")}
                     fluid
                 />

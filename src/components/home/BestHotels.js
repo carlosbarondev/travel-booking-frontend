@@ -39,17 +39,16 @@ export const BestHotels = () => {
 
     return (
         checking && <Container className="mt-4 mb-4 p-0">
-            <h4 className="mb-3">Hoteles Mejor Valorados</h4>
-            <Row xs={3} sm={4} md={5} className="g-3">
+            <h3 className="mt-2 mb-4 ms-2 ms-sm-0"><strong>Hoteles Mejor Valorados</strong></h3>
+            <Row xs={2} sm={3} md={4} lg={5} className="g-0">
                 {
                     hotels.map((hotel) => (
-                        <Col key={hotel._id} onClick={() => handleHotel(hotel.name)}>
+                        <Col className="bestHotel" key={hotel._id} onClick={() => handleHotel(hotel.name)}>
                             <Card>
-                                <Card.Img variant="top" src={hotel.img} />
+                                <Card.Img style={{ "height": "124px" }} variant="top" src={hotel.img} />
                                 <Card.Body>
-                                    <Card.Title>{hotel.name}</Card.Title>
+                                    <Card.Title style={{ "whiteSpace": "nowrap", "overflow": "hidden" }}>{hotel.name}</Card.Title>
                                     <Rating
-                                        className=""
                                         style={{ "pointerEvents": "none", "marginTop": "-15px" }}
                                         size={20}
                                         ratingValue={hotel.stars * 20}
@@ -58,9 +57,10 @@ export const BestHotels = () => {
                                     <Card.Text>
                                         {hotel.city}
                                     </Card.Text>
-                                    <Card.Text>
-                                        {hotel.country}
-                                    </Card.Text>
+                                    <div className="ratingHome rounded-end">
+                                        <strong className="p-2">{hotel.rating ? hotel.rating / 10 : 0}</strong>
+                                    </div>
+                                    <span className="text-muted ms-2">{hotel.comments.length} {hotel.comments.length === 1 ? "comentario" : "comentarios"}</span>
                                 </Card.Body>
                             </Card>
                         </Col>

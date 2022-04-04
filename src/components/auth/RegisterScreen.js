@@ -50,10 +50,10 @@ export const RegisterScreen = () => {
         <div className="d-flex flex-column align-items-center">
             <div className="text-center">
                 <Image
-                    src="/assets/logo_grande.png"
+                    src="/assets/logo.png"
                     alt="logo"
                     className='mt-3 mt-sm-5 mb-0 mb-sm-4'
-                    style={{ "cursor": "pointer", "maxWidth": "75%" }}
+                    style={{ "cursor": "pointer", "maxWidth": "50%" }}
                     onClick={() => navigate("/")}
                     fluid
                 />

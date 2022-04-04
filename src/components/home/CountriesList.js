@@ -66,7 +66,7 @@ export const CountriesList = () => {
                         fluid
                     />
                     <div className='text-on-image'>
-                        <h2>Alemania</h2>
+                        <h2 className="ms-md-1">Alemania</h2>
                         <h5>20 alojamientos</h5>
                     </div>
                 </Col>

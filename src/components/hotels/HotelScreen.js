@@ -103,8 +103,7 @@ export const HotelScreen = () => {
                     />
                 </div>
             </div>
-            <DateBarHotel />
-            <Container>
+            <Container className="mb-4">
                 <h3 className="px-0 mx-0 mt-4">{hotel.name}</h3>
                 <div className="d-flex align-items-center">
                     <Rating
@@ -122,9 +121,10 @@ export const HotelScreen = () => {
                         }
                     </div>
                 </div>
-                <div className="mt-3" style={{ "whiteSpace": "pre-wrap" }}>{hotel.description}</div>
+                <div className="mt-3 mb-4" style={{ "whiteSpace": "pre-wrap" }}>{hotel.description}</div>
+                <DateBarHotel />
                 <Row>
-                    <Col xs={12} lg={8} className="mt-5">
+                    <Col xs={12} lg={8} className="mt-4">
                         <h3>Elige tu habitación</h3>
                         <Row className="border mt-4 mx-1" onClick={() => handleSelect("roomType", { type: "Doble", price: hotel.doubleRoom.price })} style={{ "cursor": "pointer" }}>
                             <Col xs={5} className="p-0">

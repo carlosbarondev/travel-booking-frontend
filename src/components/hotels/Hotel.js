@@ -44,7 +44,7 @@ export const Hotel = (props) => {
             </Col>
             <Col xs={8} className="d-flex flex-column">
                 <span className="mt-2">
-                    <strong style={{ "fontSize": "20px" }}>{name}</strong>
+                    <strong style={{ "fontSize": "21px" }}>{name}</strong>
                     <Rating
                         className="ms-2"
                         style={{ "pointerEvents": "none", "marginTop": "-6px" }}
@@ -55,33 +55,29 @@ export const Hotel = (props) => {
                 </span>
                 <div className="text-muted mt-2">{city.toUpperCase()}</div>
                 <span className="mt-2">
-                    <Rating
-                        style={{ "pointerEvents": "none", "marginTop": "-6px" }}
-                        size={15}
-                        ratingValue={rating}
-                        allowHover={false}
-                    />
-                    <span className="text-muted ms-2">{`${comments.length} Opiniones`}</span>
+                    <div className="ratingHome rounded-end">
+                        <strong className="p-2">{rating ? rating / 10 : 0}</strong>
+                    </div>
+                    <span className="text-muted ms-2">{comments.length} {comments.length === 1 ? "comentario" : "comentarios"}</span>
                 </span>
                 <div className="mt-auto">
                     <Button
                         className="float-end"
-                        size="lg"
-                        style={{ "width": "250px", "marginBottom": "-4px" }}
+                        style={{ "width": "250px", "marginBottom": "-4px", "backgroundColor": "#003580" }}
                         onClick={handleInfo}
                     >
-                        {`Disfrútalo desde ${doubleRoom.price} €`}
+                        <strong>{`Disfrútalo desde ${doubleRoom.price} €`}</strong>
                     </Button>
                 </div>
                 <div>
                     <i
                         className="fa-solid fa-circle-info fa-xl ms-1"
-                        style={{ "cursor": "pointer" }}
+                        style={{ "cursor": "pointer", "fontSize": "30px" }}
                         onClick={handleInfo}
                     ></i>
                     <span
                         className="linkHotel ms-1"
-                        style={{ "cursor": "pointer" }}
+                        style={{ "cursor": "pointer", "fontSize": "18px" }}
                         onClick={handleInfo}
                     >Info</span>
                     <strong className="float-end mt-1 mb-2 me-1" style={{ "fontSize": "14px" }}>Precio total - Impuestos incluidos</strong>

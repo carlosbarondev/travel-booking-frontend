@@ -76,7 +76,10 @@ export const bookingReducer = (state = initialState, action) => {
             }
         case types.bookingClear:
             return {
-                booking: null
+                booking: {
+                    adults: 2,
+                    children: 0
+                }
             }
         default:
             return state;

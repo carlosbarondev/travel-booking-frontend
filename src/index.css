@@ -74,13 +74,13 @@
 
 @media (max-width: 767.98px) {
   .disable-card-header {
-      display: none;
+    display: none;
   }
 }
 
 @media (min-width: 768px) {
   .enable-card-header {
-      display: none;
+    display: none;
   }
 }
 
@@ -157,27 +157,27 @@
   align-items: center;
 }
 
-@media (max-width: 767.98px) { 
+@media (max-width: 767.98px) {
   .disable-float {
-      float: left;
+    float: left;
   }
 }
 
-@media (min-width: 767.98px) { 
+@media (min-width: 767.98px) {
   .disable-float {
-      float: right;
+    float: right;
   }
 }
 
 @media (max-width: 575.98px) {
   .disableIcon {
-      display: none;
+    display: none;
   }
 }
 
 @media (max-width: 475px) {
   .fontSM {
-      font-size: 12px;
+    font-size: 12px;
   }
 }
 
@@ -217,90 +217,118 @@
 
 @media (max-width: 1399.98px) {
   .disableText {
-      display: none;
+    display: none;
   }
 }
 
 @media (max-width: 1199.98px) {
   .disableTextLg {
-      display: none;
+    display: none;
   }
 }
 
 @media (min-width: 1200px) {
   .enableTextLg {
-      display: none;
+    display: none;
   }
 }
 
-@media (max-width: 767.98px) { 
+@media (max-width: 767.98px) {
   .navbarDisableImg {
-      display: none;
+    display: none;
   }
 }
 
 @media (min-width: 768px) {
   .navbarEnableImg {
-      display: none;
+    display: none;
   }
 }
 
-@media (min-width: 0px) { 
+@media (min-width: 0px) {
   .containerBanner {
     height: 150px;
   }
+
   .titleBanner {
     font-size: 30px;
   }
+
   .subtitleBanner {
     font-size: 15px;
   }
 }
 
-@media (min-width: 576px) { 
+@media (min-width: 576px) {
   .containerBanner {
     height: 200px;
   }
+
   .titleBanner {
     font-size: 36px;
   }
+
   .subtitleBanner {
     font-size: 18px;
   }
 }
 
-@media (min-width: 768px) { 
+@media (min-width: 768px) {
   .containerBanner {
     height: 210px;
   }
+
   .titleBanner {
     font-size: 40px;
   }
+
   .subtitleBanner {
     font-size: 20px;
   }
 }
 
-@media (min-width: 992px) { 
+@media (min-width: 992px) {
   .containerBanner {
     height: 220px;
   }
+
   .titleBanner {
     font-size: 46px;
   }
+
   .subtitleBanner {
     font-size: 23px;
   }
 }
 
-@media (min-width: 1200px) { 
+@media (min-width: 1200px) {
   .containerBanner {
     height: 230px;
   }
+
   .titleBanner {
     font-size: 50px;
   }
+
   .subtitleBanner {
     font-size: 25px;
   }
+}
+
+.ratingHome {
+  background-color: #003580;
+  color: white;
+  float: left;
+  height: 25px;
+  text-align: center;
+  width: 35px;
+}
+
+.bestHotel {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.bestHotel:hover {
+  filter: brightness(90%);
 }

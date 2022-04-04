@@ -45,7 +45,7 @@ export const Footer = () => {
 
             <div className="col-12 col-lg-4 mt-5 mt-sm-0">
                 <div className="d-flex flex-column justify-content-center align-items-center">
-                    <a className="linkFooter" href="https://github.com/carlosbarondev">carlosbarondev &copy; 2022</a>
+                    <a className="linkFooter" href="https://github.com/carlosbarondev"><strong>carlosbarondev &copy; 2022</strong></a>
                 </div>
             </div>
 

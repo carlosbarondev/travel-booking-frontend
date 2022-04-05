@@ -50,7 +50,7 @@ export const Orders = () => {
         const startDate = new Date(booking.booking.date.startDate);
         startDate.setDate(startDate.getDate());
         if (startDate < today) {
-            return Swal.fire('La fecha ya ha pasado', "", 'error');
+            return Swal.fire('La fecha ha expirado', "", 'error');
         } else if (startDate < limit) {
             return Swal.fire('Quedan menos de tres días', "Ya no se puede cancelar la reserva", 'error');
         } else {

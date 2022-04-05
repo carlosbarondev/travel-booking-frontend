@@ -61,7 +61,7 @@ export const LoginScreen = () => {
                         <ListGroup.Item className='border-0'>
                             <i className="fa-solid fa-user-gear fa-xl"></i>
                             <b> Administrador</b>
-                            <div className='mt-2 ms-4'>E-mail: <span className="text-primary">admin@ecommerce.com</span></div>
+                            <div className='mt-2 ms-4'>E-mail: <span className="text-primary">admin@bh.com</span></div>
                             <div className='ms-4'>Contraseña: <span className="text-primary">123456</span></div>
                         </ListGroup.Item>
                         <ListGroup.Item className='border-0'>
@@ -111,14 +111,14 @@ export const LoginScreen = () => {
                                     Mostrar contraseña
                                 </label>
                             </div>
-                            <Button className="mt-2" type="submit" variant="primary" size="lg">Iniciar sesión</Button>
+                            <Button className="mt-2 mb-2 mb-xl-0" type="submit" variant="primary" size="lg" style={{ "zIndex": "2" }}>Iniciar sesión</Button>
                             <div className="position-relative my-2 text-center">
                                 <hr />
-                                <p className="position-absolute top-50 start-50 translate-middle bg-white px-3">
+                                <p className="position-absolute top-50 start-50 translate-middle bg-white px-3" style={{ "zIndex": "1" }}>
                                     ¿Eres nuevo cliente?
                                 </p>
                             </div>
-                            <Button type="button" variant="outline-primary" size="lg" onClick={handleRegister}>Crear cuenta</Button>
+                            <Button className="mt-2 mt-xl-0" type="button" variant="outline-primary" size="lg" onClick={handleRegister} style={{ "zIndex": "2" }}>Crear cuenta</Button>
                         </Form>
                     </Formik>
                 </Col>

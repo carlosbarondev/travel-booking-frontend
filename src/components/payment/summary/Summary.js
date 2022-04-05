@@ -168,7 +168,8 @@ export const Summary = () => {
                     />
                 </Card.Body>
             </Card>
-            <Button variant="warning" size="lg" onClick={() => navigate("/")} className="float-end mt-5 mb-5">Seguir buscando</Button>
+            <h4 className="mt-4 ms-3 me-3">Recuerde que puede cancelar su alojamiento, sin ningún coste, hasta <strong>tres días</strong> antes de la reserva</h4>
+            <Button variant="warning" size="lg" onClick={() => navigate("/")} className="float-end mt-4 mb-5">Buscar otro destino</Button>
         </Container>
     )
 }

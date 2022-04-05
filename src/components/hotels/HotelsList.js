@@ -5,7 +5,7 @@ import { Col, Container, Row } from "react-bootstrap"
 import { fetch_No_Token } from "../../helpers/fetch";
 import { Hotel } from "./Hotel";
 import { FilterHotel } from "./FilterHotel";
-import { DateBar } from "../home/DateBar";
+import { DateBarHotel } from "./DateBarHotel";
 
 export const HotelsList = () => {
 
@@ -47,22 +47,24 @@ export const HotelsList = () => {
     return (
         checking &&
         <Container>
-            <DateBar />
             <div className="mt-4">TUS RESULTADOS DE BÚSQUEDA</div>
-            <h3 className="mt-1">{`Nuestros ${hotels.length} Hoteles en "${booking.country}"`}</h3>
-            <Row>
-                <Col xs={12} md={3} className="mt-4">
+            <h3 className="mt-1 mb-4">{`Nuestros ${hotels.length} Hoteles en "${booking.country}"`}</h3>
+            <DateBarHotel />
+            <Row className="mt-2">
+                <Col xs={12} lg={3} className="mt-4 mb-4">
                     <FilterHotel hotels={hotels} setFiltered={setFiltered} />
                 </Col>
-                <Col xs={12} md={9} className="px-4">
+                <Col xs={12} lg={9} className="px-4">
                     <div className="animate__animated animate__fadeIn mt-4 mb-5">
                         {
-                            filtered.map(hotel => (
-                                <Hotel
-                                    key={hotel._id}
-                                    {...hotel}
-                                />
-                            ))
+                            filtered.length !== 0
+                                ? filtered.map(hotel => (
+                                    <Hotel
+                                        key={hotel._id}
+                                        {...hotel}
+                                    />
+                                ))
+                                : <h5>No hay resultados con las opciones de búsqueda seleccionadas</h5>
                         }
                     </div>
                 </Col>

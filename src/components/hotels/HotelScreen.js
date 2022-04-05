@@ -124,10 +124,10 @@ export const HotelScreen = () => {
                 <div className="mt-3 mb-4" style={{ "whiteSpace": "pre-wrap" }}>{hotel.description}</div>
                 <DateBarHotel />
                 <Row>
-                    <Col xs={12} lg={8} className="mt-4">
+                    <Col xs={12} xl={8} className="mt-4">
                         <h3>Elige tu habitación</h3>
                         <Row className="border mt-4 mx-1" onClick={() => handleSelect("roomType", { type: "Doble", price: hotel.doubleRoom.price })} style={{ "cursor": "pointer" }}>
-                            <Col xs={5} className="p-0">
+                            <Col xs={12} md={6} className="p-0">
                                 <Form.Check
                                     style={{ "pointerEvents": "none", "position": "absolute", "marginTop": "5px", "marginLeft": "12px" }}
                                     type='radio'
@@ -135,9 +135,9 @@ export const HotelScreen = () => {
                                     name="roomType"
                                     label={``}
                                 />
-                                <Image className="h-100" src={hotel.doubleRoom.img} fluid />
+                                <Image className="h-100 roomScreen" src={hotel.doubleRoom.img} fluid />
                             </Col>
-                            <Col xs={7} className="p-0">
+                            <Col xs={12} md={6} className="p-0">
                                 <h4 className="mt-3 ms-3">Doble</h4>
                                 <div className="text-muted ms-4"><i className="fa-solid fa-bed"></i> Capacidad: 2 adultos</div>
                                 <h5 className="mt-2 text-muted ms-4">Amplitud y todas las facilidades</h5>
@@ -148,7 +148,7 @@ export const HotelScreen = () => {
                             </Col>
                         </Row>
                         <Row className="border mt-5 mx-1" onClick={() => handleSelect("roomType", { type: "Familiar", price: hotel.familyRoom.price })} style={{ "cursor": "pointer" }}>
-                            <Col xs={5} className="p-0">
+                            <Col xs={12} md={6} className="p-0">
                                 <Form.Check
                                     style={{ "pointerEvents": "none", "position": "absolute", "marginTop": "5px", "marginLeft": "12px" }}
                                     type='radio'
@@ -156,9 +156,9 @@ export const HotelScreen = () => {
                                     name="roomType"
                                     label={``}
                                 />
-                                <Image className="h-100" src={hotel.familyRoom.img} fluid />
+                                <Image className="h-100 roomScreen" src={hotel.familyRoom.img} fluid />
                             </Col>
-                            <Col xs={7} className="p-0">
+                            <Col xs={12} md={6} className="p-0">
                                 <h4 className="mt-3 ms-3">Familiar</h4>
                                 <div className="text-muted ms-4"><i className="fa-solid fa-bed"></i> Capacidad: 4 adultos</div>
                                 <h5 className="mt-2 text-muted ms-4">Espacio para toda la familia</h5>
@@ -169,7 +169,7 @@ export const HotelScreen = () => {
                             </Col>
                         </Row>
                         <Row className="border mt-5 mx-1" onClick={() => handleSelect("roomType", { type: "Suite", price: hotel.suiteRoom.price })} style={{ "cursor": "pointer" }}>
-                            <Col xs={5} className="p-0">
+                            <Col xs={12} md={6} className="p-0">
                                 <Form.Check
                                     style={{ "pointerEvents": "none", "position": "absolute", "marginTop": "5px", "marginLeft": "12px" }}
                                     type='radio'
@@ -177,9 +177,9 @@ export const HotelScreen = () => {
                                     name="roomType"
                                     label={``}
                                 />
-                                <Image className="h-100" src={hotel.suiteRoom.img} fluid />
+                                <Image className="h-100 roomScreen" src={hotel.suiteRoom.img} fluid />
                             </Col>
-                            <Col xs={7} className="p-0">
+                            <Col xs={12} md={6} className="p-0">
                                 <h4 className="mt-3 ms-3">Suite</h4>
                                 <div className="text-muted ms-4"><i className="fa-solid fa-bed"></i> Capacidad: 2 adultos</div>
                                 <h5 className="mt-2 text-muted ms-4">Dos pisos para ti y tu acompañante</h5>
@@ -261,13 +261,13 @@ export const HotelScreen = () => {
                                 />
                                 <Image className="h-100" src="/assets/parking.png" fluid />
                             </Col>
-                            <Col xs={7} className="d-flex">
-                                <h4 className="mt-3 ms-3">Parking en el hotel</h4>
-                                <h4 className="align-self-end ms-auto">Por solo 30€</h4>
+                            <Col xs={7} className="d-flex flex-column">
+                                <h3 className="mt-2 mt-md-3 ms-3">Parking en el hotel</h3>
+                                <h4 className="mt-auto ms-auto mb-3">Por solo 30€</h4>
                             </Col>
                         </Row>
                     </Col>
-                    <Col xs={12} lg={4} className="mt-5">
+                    <Col xs={12} xl={4} className="mt-5">
                         <BookingDetails hotel={hotel} />
                     </Col>
                 </Row>

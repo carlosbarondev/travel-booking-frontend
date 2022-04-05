@@ -39,10 +39,10 @@ export const Hotel = (props) => {
 
     return (
         <Row className="border mb-4">
-            <Col xs={4} className="p-0">
+            <Col xs={12} md={4} className="p-0">
                 <Image className="h-100" src={img} fluid />
             </Col>
-            <Col xs={8} className="d-flex flex-column">
+            <Col xs={12} md={8} className="d-flex flex-column">
                 <span className="mt-2">
                     <strong style={{ "fontSize": "21px" }}>{name}</strong>
                     <Rating
@@ -71,7 +71,7 @@ export const Hotel = (props) => {
                 </div>
                 <div>
                     <i
-                        className="fa-solid fa-circle-info fa-xl ms-1"
+                        className="fa-solid fa-circle-info fa-xl"
                         style={{ "cursor": "pointer", "fontSize": "30px" }}
                         onClick={handleInfo}
                     ></i>

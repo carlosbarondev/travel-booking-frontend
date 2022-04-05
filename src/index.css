@@ -5,8 +5,8 @@
 }
 
 .homeBanner {
-  background-color: #003580;
-  color: white;
+  background-color: #003580 !important;
+  color: white !important;
 }
 
 .homeDateBar {
@@ -331,4 +331,10 @@
 
 .bestHotel:hover {
   filter: brightness(90%);
+}
+
+@media (max-width: 767.98px) {
+  .roomScreen {
+    width: 100% !important;
+  }
 }

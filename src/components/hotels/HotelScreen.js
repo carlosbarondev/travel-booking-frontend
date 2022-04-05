@@ -91,7 +91,7 @@ export const HotelScreen = () => {
         checking &&
         <>
             <div className="hotel-head-text">
-                <Image className="w-100" src={hotel.img} fluid />
+                <Image className="w-100" src={hotel.img ? hotel.img : "/assets/no-image.png"} fluid />
                 <div className='hotel-text-on-image'>
                     <h1>{hotel.name}</h1>
                     <Rating
@@ -135,7 +135,7 @@ export const HotelScreen = () => {
                                     name="roomType"
                                     label={``}
                                 />
-                                <Image className="h-100 roomScreen" src={hotel.doubleRoom.img} fluid />
+                                <Image className="h-100 roomScreen" src={hotel.doubleRoom.img ? hotel.doubleRoom.img : "/assets/no-image.png"} fluid />
                             </Col>
                             <Col xs={12} md={6} className="p-0">
                                 <h4 className="mt-3 ms-3">Doble</h4>
@@ -156,7 +156,7 @@ export const HotelScreen = () => {
                                     name="roomType"
                                     label={``}
                                 />
-                                <Image className="h-100 roomScreen" src={hotel.familyRoom.img} fluid />
+                                <Image className="h-100 roomScreen" src={hotel.familyRoom.img ? hotel.familyRoom.img : "/assets/no-image.png"} fluid />
                             </Col>
                             <Col xs={12} md={6} className="p-0">
                                 <h4 className="mt-3 ms-3">Familiar</h4>
@@ -177,7 +177,7 @@ export const HotelScreen = () => {
                                     name="roomType"
                                     label={``}
                                 />
-                                <Image className="h-100 roomScreen" src={hotel.suiteRoom.img} fluid />
+                                <Image className="h-100 roomScreen" src={hotel.suiteRoom.img ? hotel.suiteRoom.img : "/assets/no-image.png"} fluid />
                             </Col>
                             <Col xs={12} md={6} className="p-0">
                                 <h4 className="mt-3 ms-3">Suite</h4>

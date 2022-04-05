@@ -46,7 +46,7 @@ export const CountriesList = () => {
                         <h5>{countries.esp} alojamientos</h5>
                     </div>
                 </Col>
-                <Col xs={12} md={6} className="mt-3 mt-md-0 p-md-0 ps-md-2 head-text">
+                <Col xs={12} md={6} className="mt-3 mt-md-0 p-md-0 ps-md-2 head-text" onClick={() => handleCountry("Francia")}>
                     <Image
                         src="/assets/france.jpg"
                         fluid
@@ -58,7 +58,7 @@ export const CountriesList = () => {
                 </Col>
             </Row>
             <Row className="mt-0 mt-md-3">
-                <Col xs={12} md={4} className="mt-3 mt-md-0 p-md-0 pe-md-2 head-text">
+                <Col xs={12} md={4} className="mt-3 mt-md-0 p-md-0 pe-md-2 head-text" onClick={() => handleCountry("Italia")}>
                     <Image
                         src="/assets/italy.jpg"
                         fluid
@@ -68,7 +68,7 @@ export const CountriesList = () => {
                         <h5>{countries.it} alojamientos</h5>
                     </div>
                 </Col>
-                <Col xs={12} md={4} className="mt-3 mt-md-0 px-md-1 head-text">
+                <Col xs={12} md={4} className="mt-3 mt-md-0 px-md-1 head-text" onClick={() => handleCountry("Inglaterra")}>
                     <Image
 
                         src="/assets/england.jpg"
@@ -79,7 +79,7 @@ export const CountriesList = () => {
                         <h5>{countries.en} alojamientos</h5>
                     </div>
                 </Col>
-                <Col xs={12} md={4} className="mt-3 mt-md-0 p-md-0 ps-md-2 head-text">
+                <Col xs={12} md={4} className="mt-3 mt-md-0 p-md-0 ps-md-2 head-text" onClick={() => handleCountry("Alemania")}>
                     <Image
                         src="/assets/germany.jpg"
                         fluid

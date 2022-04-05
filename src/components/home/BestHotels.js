@@ -45,7 +45,7 @@ export const BestHotels = () => {
                     hotels.map((hotel) => (
                         <Col className="bestHotel" key={hotel._id} onClick={() => handleHotel(hotel.name)}>
                             <Card>
-                                <Card.Img style={{ "height": "124px" }} variant="top" src={hotel.img} />
+                                <Card.Img style={{ "height": "124px" }} variant="top" src={hotel.img ? hotel.img : "/assets/no-image.png"} />
                                 <Card.Body>
                                     <Card.Title style={{ "whiteSpace": "nowrap", "overflow": "hidden" }}>{hotel.name}</Card.Title>
                                     <Rating

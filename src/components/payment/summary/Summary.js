@@ -30,7 +30,7 @@ export const Summary = () => {
         async function fetchData() {
 
             if (localStorage.getItem('order') === null) { // Se ejecuta cuando el usuario llega desde la pantalla de pago
-                console.log("primero")
+
                 const payment = await fetch_Token(`payments/${searchParams.get("payment_intent")}`);
 
                 const body = await payment.json();
@@ -92,7 +92,6 @@ export const Summary = () => {
                     }
                 }
             } else { // Se ejecuta cuando el usuario recarga el navegador
-                console.log("segundo")
                 setSummary(JSON.parse(localStorage.getItem('order')));
                 setChecking(true);
             }

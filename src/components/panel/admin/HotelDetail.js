@@ -343,12 +343,12 @@ export const HotelDetail = () => {
                                 ? rooms.map(room =>
                                     <ListGroup.Item key={room.roomId}>
                                         <Row className="align-items-center">
-                                            <Col xs={3} sm={3} md={3}>
+                                            <Col xs={2} sm={2} md={2}>
                                                 {
                                                     room.roomId
                                                 }
                                             </Col>
-                                            <Col xs={2} sm={2} md={2}>
+                                            <Col xs={3} sm={3} md={3}>
                                                 {
                                                     room.category
                                                 }

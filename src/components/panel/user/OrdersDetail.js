@@ -65,10 +65,10 @@ export const OrdersDetail = () => {
             <Card>
                 <Card.Body>
                     <Row className="align-items-center">
-                        <Col xs={3} sm={3} md={2} className="d-flex justify-content-center align-items-center" style={{ "height": "8rem" }}>
-                            <Image style={{ "maxHeight": "70%" }} src={booking.hotel.img ? booking.hotel.img : "/assets/no-image.png"} fluid />
+                        <Col xs={4} sm={3} md={2} className="d-flex justify-content-center align-items-center" style={{ "height": "8rem" }}>
+                            <Image src={booking.hotel.img ? booking.hotel.img : "/assets/no-image.png"} fluid />
                         </Col>
-                        <Col xs={9} sm={9} md={5}>
+                        <Col xs={8} sm={9} md={5}>
                             <Link className="linkHotel" style={{ "fontSize": "18px" }} to={`/hoteles/${normalizeText(booking.hotel.name.replace(/\s+/g, "-"))}`}>{booking.hotel.name}</Link>
                             <div style={{ "fontSize": "14px" }}>Estancia: {lightFormat(new Date(booking.booking.date.startDate), 'dd/MM/yyyy')} - {lightFormat(new Date(booking.booking.date.endDate), 'dd/MM/yyyy')} {`${booking.booking.days === 1 ? `(${booking.booking.days} noche)` : `(${booking.booking.days} noches)`}`}</div>
                             <b>{booking.total}€</b>

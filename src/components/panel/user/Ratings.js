@@ -172,10 +172,12 @@ export const Ratings = () => {
                                             classNames="item"
                                         >
                                             <Row className="mt-4">
-                                                <Col xs={3} sm={3} md={3} lg={3} xl={2} className="d-flex justify-content-center align-items-center" style={{ "height": "8rem" }}>
+                                                <Col xs={1} xl={1}>
+                                                </Col>
+                                                <Col xs={3} xl={2} className="d-flex justify-content-center align-items-center" style={{ "height": "8rem" }}>
                                                     <Image style={{ "maxHeight": "80%" }} src={op.img ? op.img : "/assets/no-image.png"} fluid />
                                                 </Col>
-                                                <Col xs={9} sm={9} md={9} lg={9} xl={3} className="d-flex flex-column">
+                                                <Col xs={8} xl={3} className="d-flex flex-column">
                                                     <div>
                                                         <div className="linkHotel mb-1" style={{ "fontSize": "20px", "cursor": "pointer" }} onClick={() => handleLink(op.name)}>{op.name}</div>
                                                     </div>
@@ -200,7 +202,7 @@ export const Ratings = () => {
                                                         </Button>
                                                     </div>
                                                 </Col>
-                                                <Col xs={12} sm={12} md={12} lg={12} xl={7} className="mt-4 mt-xl-0">
+                                                <Col xs={12} xl={6} className="mt-4 mt-xl-0 ms-2 ms-xl-0">
                                                     <div>
                                                         <Rating
                                                             className="me-2"

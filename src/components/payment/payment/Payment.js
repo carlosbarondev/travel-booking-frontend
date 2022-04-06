@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { Col, ListGroup, Row, Spinner } from "react-bootstrap";
@@ -18,6 +18,8 @@ const stripePromise = loadStripe("pk_test_51KZH9rK7t3f78Hp2q0mtyopW0RtVqrg0MxOht
 
 export const Payment = () => {
 
+    const navigate = useNavigate();
+
     const location = useLocation();
     const { phone, billing } = location.state;
 
@@ -29,6 +31,9 @@ export const Payment = () => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
+        if (localStorage.getItem('order') !== null) {
+            return navigate("/");
+        }
         fetch_Token(`payments/${uid}`, { email, name, phone, billing, idHotel: booking.idHotel, items: booking }, 'POST')
             .then((res) => res.json())
             .then((data) => {

@@ -111,7 +111,7 @@ export const Orders = () => {
                         <Card key={booking._id} className="mt-4">
                             <Card.Header>
                                 <Row className="ms-2">
-                                    <Col md={3} className="mb-2">
+                                    <Col xs={12} md={3} className="mb-2">
                                         <Row>
                                             Reserva realizada
                                         </Row>
@@ -119,7 +119,7 @@ export const Orders = () => {
                                             {new Date(booking.date).toLocaleDateString("es-ES", options)}
                                         </Row>
                                     </Col>
-                                    <Col md={3} className="mb-2">
+                                    <Col xs={12} md={3} className="mb-2">
                                         <Row>
                                             Total
                                         </Row>
@@ -127,15 +127,15 @@ export const Orders = () => {
                                             {booking.total}€
                                         </Row>
                                     </Col>
-                                    <Col className="mb-2">
+                                    <Col xs={12} md={6} className="mb-2">
                                         <Row className="me-1 disable-float">
                                             Reserva nº {booking.idBooking}
                                         </Row>
                                         <Row className="disable-float">
-                                            <span>
-                                                <button className="buttonLink" onClick={() => handleDetail(booking)}>Ver los detalles de la reserva</button>
+                                            <span className="p-0">
+                                                <button className="buttonLink p-0" onClick={() => handleDetail(booking)}>Ver los detalles de la reserva</button>
                                                 <div className="vr ms-2 me-2"></div>
-                                                <button className="buttonLink" onClick={() => handleCancel(booking)}>Cancelar reserva</button>
+                                                <button className="buttonLink p-0" onClick={() => handleCancel(booking)}>Cancelar reserva</button>
                                             </span>
                                         </Row>
                                     </Col>
@@ -143,14 +143,14 @@ export const Orders = () => {
                             </Card.Header>
                             <Card.Body>
                                 <Row className="align-items-center mb-3">
-                                    <Col xs={2} md={1} className="d-flex justify-content-center align-items-center" style={{ "height": "5rem" }}>
-                                        <Image style={{ "maxHeight": "70%" }} src={booking.hotel.img ? booking.hotel.img : "/assets/no-image.png"} fluid />
+                                    <Col xs={3} md={2} className="d-flex justify-content-center align-items-center" style={{ "height": "5rem" }}>
+                                        <Image src={booking.hotel.img ? booking.hotel.img : "/assets/no-image.png"} fluid />
                                     </Col>
-                                    <Col xs={5} md={6}>
+                                    <Col xs={9} md={6}>
                                         <div className="linkHotel" style={{ "fontSize": "18px", "cursor": "pointer" }} onClick={() => handleLink(booking.hotel.name)}>{booking.hotel.name}</div>
                                         <div style={{ "fontSize": "14px" }}>Estancia: {lightFormat(new Date(booking.booking.date.startDate), 'dd/MM/yyyy')} - {lightFormat(new Date(booking.booking.date.endDate), 'dd/MM/yyyy')} {`${booking.booking.days === 1 ? `(${booking.booking.days} noche)` : `(${booking.booking.days} noches)`}`}</div>
                                     </Col>
-                                    <Col xs={5} md={5} className="text-center mt-2">
+                                    <Col xs={12} md={4} className="text-center mt-2">
                                         <div className="d-grid">
                                             <Button
                                                 variant="outline-secondary"

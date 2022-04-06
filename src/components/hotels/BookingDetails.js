@@ -91,7 +91,7 @@ export const BookingDetails = ({ hotel }) => {
                         </div>
                     </Card.Text>
                     <div className="d-grid">
-                        <Button variant="primary" onClick={handleStart}>Continuar a datos personales</Button>
+                        <Button className='homeBanner' onClick={handleStart}><strong>Continuar a datos personales</strong></Button>
                     </div>
                 </Card.Body>
             </Card>

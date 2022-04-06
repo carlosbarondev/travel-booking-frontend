@@ -54,7 +54,7 @@ export const Hotel = (props) => {
                     />
                 </span>
                 <div className="text-muted mt-2">{city.toUpperCase()}</div>
-                <span className="mt-2">
+                <span className="mt-2 mb-4 mb-md-0">
                     <div className="ratingHome rounded-end">
                         <strong className="p-2">{rating ? rating / 10 : 0}</strong>
                     </div>
@@ -62,7 +62,7 @@ export const Hotel = (props) => {
                 </span>
                 <div className="mt-auto">
                     <Button
-                        className="float-end"
+                        className="float-end mb-1 mb-md-0"
                         style={{ "width": "250px", "marginBottom": "-4px", "backgroundColor": "#003580" }}
                         onClick={handleInfo}
                     >

@@ -29,6 +29,7 @@ export const BillingAddress = () => {
             setBilling(user.billing);
             dispatch(stepChange(2));
             localStorage.setItem('step', 2);
+            localStorage.removeItem("order");
             setChecking(true);
         }
         fetchData();

@@ -137,7 +137,7 @@ export const HotelScreen = () => {
                                 />
                                 <Image className="h-100 roomScreen" src={hotel.doubleRoom.img ? hotel.doubleRoom.img : "/assets/no-image.png"} fluid />
                             </Col>
-                            <Col xs={12} md={7} className="p-0">
+                            <Col xs={12} md={7} className="d-flex flex-column p-0">
                                 <h4 className="mt-3 ms-3">Doble</h4>
                                 <div className="text-muted ms-4"><i className="fa-solid fa-bed"></i> Capacidad: 2 adultos</div>
                                 <h5 className="mt-2 text-muted ms-4">Amplitud y todas las facilidades</h5>
@@ -158,7 +158,7 @@ export const HotelScreen = () => {
                                 />
                                 <Image className="h-100 roomScreen" src={hotel.familyRoom.img ? hotel.familyRoom.img : "/assets/no-image.png"} fluid />
                             </Col>
-                            <Col xs={12} md={7} className="p-0">
+                            <Col xs={12} md={7} className="d-flex flex-column p-0">
                                 <h4 className="mt-3 ms-3">Familiar</h4>
                                 <div className="text-muted ms-4"><i className="fa-solid fa-bed"></i> Capacidad: 4 adultos</div>
                                 <h5 className="mt-2 text-muted ms-4">Espacio para toda la familia</h5>
@@ -179,7 +179,7 @@ export const HotelScreen = () => {
                                 />
                                 <Image className="h-100 roomScreen" src={hotel.suiteRoom.img ? hotel.suiteRoom.img : "/assets/no-image.png"} fluid />
                             </Col>
-                            <Col xs={12} md={7} className="p-0">
+                            <Col xs={12} md={7} className="d-flex flex-column p-0">
                                 <h4 className="mt-3 ms-3">Suite</h4>
                                 <div className="text-muted ms-4"><i className="fa-solid fa-bed"></i> Capacidad: 2 adultos</div>
                                 <h5 className="mt-2 text-muted ms-4">Dos pisos para ti y tu acompañante</h5>

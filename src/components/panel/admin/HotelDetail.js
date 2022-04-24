@@ -223,7 +223,7 @@ export const HotelDetail = () => {
                         </Col>
                         <Col xs={12} lg={4} className="d-flex justify-content-center align-items-center">
                             <div style={{ "height": "14rem" }}>
-                                <Image className="mh-100" src={hotel.img ? hotel.img : "/assets/no-image.png"} />
+                                <Image className="mh-100" src={hotel.img ? hotel.img : "/assets/no-image.png"} fluid />
                             </div>
                         </Col>
                     </Row>

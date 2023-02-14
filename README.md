@@ -2,7 +2,7 @@
 
 Interfaz de usuario, de una cadena hotelera, construida con React.
 
-[VISTA PREVIA](https://travel-booking-carlosbarondev.herokuapp.com/) *(El servidor arranca en 10 segundos aproximadamente)*
+[VISTA PREVIA](https://travel-booking-carlosbarondev.up.railway.app/) *(El servidor arranca en 10 segundos aproximadamente)*
 
 [Backend](https://github.com/carlosbarondev/travel-booking-backend)
 
@@ -53,5 +53,5 @@ Interfaz de usuario, de una cadena hotelera, construida con React.
 
 ## Links
 
-* [Website](https://travel-booking-carlosbarondev.herokuapp.com/) *(El servidor arranca en 10 segundos aproximadamente)*
+* [Website](https://travel-booking-carlosbarondev.up.railway.app/) *(El servidor arranca en 10 segundos aproximadamente)*
 * [Backend](https://github.com/carlosbarondev/travel-booking-backend)
